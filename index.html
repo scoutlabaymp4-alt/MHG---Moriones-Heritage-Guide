@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moriones Heritage Guide</title>
+  <meta name="description" content="A bilingual learning and visitor companion for the Moryonan of Marinduque. Student project, MarSU.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main" id="skip"></a>
+
+  <header class="masthead">
+    <div class="wrap masthead-row">
+      <a class="brand" href="#/learn/legend">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span id="siteTitle" class="brand-title">Moriones Heritage Guide</span>
+          <span id="siteTagline" class="brand-tag"></span>
+        </span>
+      </a>
+      <div class="lang" role="group" aria-labelledby="langLabel">
+        <span id="langLabel" class="visually-hidden">Language</span>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button type="button" class="lang-btn" data-lang="fil" aria-pressed="false">FIL</button>
+      </div>
+    </div>
+    <nav class="wrap" aria-label="Main">
+      <ul class="nav" id="nav"></ul>
+    </nav>
+  </header>
+
+  <div class="notice" role="note">
+    <div class="wrap" id="notice"></div>
+  </div>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <p id="loading">Loading…</p>
+    <noscript><p class="error">This guide needs JavaScript to run. Please turn it on in your browser. / Kailangan ng JavaScript ang gabay na ito. Paki-on ito sa iyong browser.</p></noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap" id="footer"></div>
+  </footer>
+
+  <!-- content.js is a generated copy of content.json so the page also works when opened from disk (file://) -->
+  <script src="data/content.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

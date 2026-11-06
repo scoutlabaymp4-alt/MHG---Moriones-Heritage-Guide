@@ -1,0 +1,8 @@
+{
+  "name": "mhg-mask3d",
+  "private": true,
+  "description": "Build script for js/mask3d.js (original procedural 3D Morion mask, Three.js)",
+  "scripts": { "build": "esbuild mask3d.js --bundle --minify --format=iife --legal-comments=inline --target=es2018 --outfile=../js/mask3d.js" },
+  "dependencies": { "three": "0.170.0" },
+  "devDependencies": { "esbuild": "0.24.0" }
+}

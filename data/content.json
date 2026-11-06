@@ -1,0 +1,1635 @@
+{
+  "meta": {
+    "status": "MVP data. Filipino text is AI-drafted and NOT yet reviewed by a native speaker or local cultural bearer. Event schedules come from news reports of past years and must be re-checked each year.",
+    "scheduleNote": {
+      "en": "Schedules come from news reports of past years and change from year to year. Confirm with the Diocese of Boac or the provincial tourism office before you travel.",
+      "fil": "Ang mga iskedyul ay galing sa balita ng mga nakaraang taon at nagbabago taon-taon. Kumpirmahin sa Diyosesis ng Boac o sa tanggapan ng turismo ng lalawigan bago bumiyahe."
+    },
+    "review": {
+      "default": {
+        "status": "unreviewed"
+      },
+      "howTo": "To record a review, add to any item: \"review\": {\"status\": \"reviewed\", \"by\": \"Name or office\", \"date\": \"YYYY-MM-DD\"}. Items without a review field show as not yet reviewed."
+    }
+  },
+  "sources": {
+    "chan": {
+      "label": "C. S. Chan (2017), Folklore without a folk: Questions in the preservation of the Marinduque Moriones heritage, Int. J. Heritage Stud.",
+      "short": "Chan 2017",
+      "url": "https://doi.org/10.1080/13527258.2016.1232746"
+    },
+    "solemn": {
+      "label": "Inquirer, \"Moriones: solemn tradition, not festive occasion\" (undated; c. 2018)",
+      "short": "Inquirer, solemn tradition",
+      "url": "https://newsinfo.inquirer.net/?p=978072"
+    },
+    "penitence": {
+      "label": "Inquirer, \"Lenten tradition: The many faces of penitence in Marinduque\", Mar. 27, 2018",
+      "short": "Inquirer, 2018",
+      "url": "https://newsinfo.inquirer.net/?p=978339"
+    },
+    "lenten": {
+      "label": "Inquirer, \"Moriones, other Lenten specials color Marinduque\" (undated)",
+      "short": "Inquirer, Lenten specials",
+      "url": "https://newsinfo.inquirer.net/172307/moriones-other-lenten-specials-color-marinduque"
+    },
+    "philstar": {
+      "label": "D. Dy-Zulueta, \"Story of faith: Marinduque's Moriones Festival takes place this Holy Week\", Philstar.com, Apr. 6, 2023",
+      "short": "Philstar 2023",
+      "url": "https://www.philstar.com/lifestyle/travel-and-tourism/2023/04/06/2257107/story-faith-marinduques-moriones-festival-takes-place-holy-week"
+    },
+    "mb": {
+      "label": "Manila Bulletin, \"Boac Cathedral declared as Important Cultural Property\", Feb. 22, 2020",
+      "short": "Manila Bulletin 2020",
+      "url": "https://mb.com.ph/2020/02/22/boac-cathedral-declared-as-important-cultural-property"
+    }
+  },
+  "ui": {
+    "title": {
+      "en": "Moriones Heritage Guide",
+      "fil": "Gabay sa Pamana ng Moriones"
+    },
+    "tagline": {
+      "en": "A learning and visitor companion for the Moryonan of Marinduque",
+      "fil": "Gabay sa pag-aaral at pagdalaw sa Moryonan ng Marinduque"
+    },
+    "notice": {
+      "en": "The Moryonan is a religious tradition of penance and vows during Holy Week. It is not a show or a party. Please learn and visit with respect.",
+      "fil": "Ang Moryonan ay isang relihiyosong tradisyon ng pagpapakasakit at panata tuwing Mahal na Araw. Hindi ito palabas o kasiyahan. Mangyaring matuto at dumalaw nang may paggalang."
+    },
+    "skip": {
+      "en": "Skip to main content",
+      "fil": "Lumaktaw sa pangunahing nilalaman"
+    },
+    "nav": {
+      "learn": {
+        "en": "Learn",
+        "fil": "Aralin"
+      },
+      "directory": {
+        "en": "Directory",
+        "fil": "Direktoryo"
+      },
+      "quiz": {
+        "en": "Quiz & Etiquette",
+        "fil": "Pagsusulit at Asal"
+      },
+      "sources": {
+        "en": "Sources",
+        "fil": "Mga Sanggunian"
+      },
+      "plan": {
+        "en": "Plan a Visit",
+        "fil": "Magplano ng Pagdalaw"
+      }
+    },
+    "langLabel": {
+      "en": "Language",
+      "fil": "Wika"
+    },
+    "learnTabs": {
+      "legend": {
+        "en": "The Legend",
+        "fil": "Ang Alamat"
+      },
+      "rites": {
+        "en": "Holy Week Timeline",
+        "fil": "Takbo ng Mahal na Araw"
+      },
+      "anatomy": {
+        "en": "Anatomy of a Morion",
+        "fil": "Bahagi ng Morion"
+      }
+    },
+    "sourcesLabel": {
+      "en": "Sources:",
+      "fil": "Mga sanggunian:"
+    },
+    "originNoteTitle": {
+      "en": "Sources differ on the origin",
+      "fil": "Magkakaiba ang sanggunian sa pinagmulan"
+    },
+    "anatomyIntro": {
+      "en": "Select a part of the costume, in the drawing or in the list, to read about it. The drawing is a simple original illustration, not a portrait of any real mask.",
+      "fil": "Pumili ng bahagi ng kasuotan, sa guhit o sa listahan, upang mabasa ang tungkol dito. Simpleng orihinal na guhit ito at hindi larawan ng anumang tunay na maskara."
+    },
+    "anatomyPrompt": {
+      "en": "No part selected yet.",
+      "fil": "Wala pang napiling bahagi."
+    },
+    "explored": {
+      "en": "parts explored",
+      "fil": "bahaging napag-aralan"
+    },
+    "dirTitle": {
+      "en": "Directory of rites and heritage sites",
+      "fil": "Direktoryo ng mga ritwal at pook-pamana"
+    },
+    "dirIntro": {
+      "en": "Only entries traced to a source are listed. More entries will be added after verification.",
+      "fil": "Mga tala lamang na may sanggunian ang nakalista. Madaragdagan pa ito pagkatapos ng beripikasyon."
+    },
+    "search": {
+      "en": "Search",
+      "fil": "Maghanap"
+    },
+    "searchPh": {
+      "en": "e.g. pugutan, Boac, cathedral",
+      "fil": "hal. pugutan, Boac, katedral"
+    },
+    "municipality": {
+      "en": "Municipality",
+      "fil": "Bayan"
+    },
+    "category": {
+      "en": "Category",
+      "fil": "Kategorya"
+    },
+    "all": {
+      "en": "All",
+      "fil": "Lahat"
+    },
+    "results": {
+      "en": "results",
+      "fil": "resulta"
+    },
+    "noResults": {
+      "en": "No entries match your search. Try fewer words or reset the filters.",
+      "fil": "Walang tala na tumutugma. Subukan ang mas kaunting salita o i-reset ang mga filter."
+    },
+    "reset": {
+      "en": "Reset filters",
+      "fil": "I-reset ang mga filter"
+    },
+    "when": {
+      "en": "When",
+      "fil": "Kailan"
+    },
+    "where": {
+      "en": "Where",
+      "fil": "Saan"
+    },
+    "verifyYearly": {
+      "en": "Verify each year",
+      "fil": "Kumpirmahin taon-taon"
+    },
+    "quizTitle": {
+      "en": "Knowledge quiz",
+      "fil": "Pagsusulit sa kaalaman"
+    },
+    "quizIntro": {
+      "en": "Eight questions drawn from the Learn section. Your progress stays on this device only.",
+      "fil": "Walong tanong mula sa seksyong Aralin. Nasa device na ito lamang ang iyong progreso."
+    },
+    "start": {
+      "en": "Start quiz",
+      "fil": "Simulan ang pagsusulit"
+    },
+    "question": {
+      "en": "Question",
+      "fil": "Tanong"
+    },
+    "of": {
+      "en": "of",
+      "fil": "sa"
+    },
+    "next": {
+      "en": "Next question",
+      "fil": "Susunod na tanong"
+    },
+    "finish": {
+      "en": "See result",
+      "fil": "Tingnan ang resulta"
+    },
+    "correct": {
+      "en": "Correct.",
+      "fil": "Tama."
+    },
+    "incorrect": {
+      "en": "Not quite.",
+      "fil": "Hindi pa tama."
+    },
+    "score": {
+      "en": "Your score",
+      "fil": "Iyong iskor"
+    },
+    "retry": {
+      "en": "Try again",
+      "fil": "Subukang muli"
+    },
+    "best": {
+      "en": "Best score",
+      "fil": "Pinakamataas na iskor"
+    },
+    "attempts": {
+      "en": "Attempts",
+      "fil": "Mga pagsubok"
+    },
+    "badges": {
+      "en": "Badges",
+      "fil": "Mga badge"
+    },
+    "noBadges": {
+      "en": "No badges yet.",
+      "fil": "Wala pang badge."
+    },
+    "etiquetteTitle": {
+      "en": "Respectful visitor checklist",
+      "fil": "Talaan ng magalang na bisita"
+    },
+    "etiquetteIntro": {
+      "en": "Tick each item you understand. Items marked \"Sourced\" come from the reports listed in Sources. Items marked \"Pending review\" are general courtesy that the group will confirm with local cultural bearers.",
+      "fil": "Lagyan ng tsek ang bawat bagay na nauunawaan mo. Ang may markang \"May sanggunian\" ay mula sa mga ulat sa Mga Sanggunian. Ang may markang \"Hinihintay ang pagsusuri\" ay pangkalahatang kagandahang-asal na kukumpirmahin ng grupo sa mga lokal na tagapagdala ng kultura."
+    },
+    "sourced": {
+      "en": "Sourced",
+      "fil": "May sanggunian"
+    },
+    "pending": {
+      "en": "Pending review",
+      "fil": "Hinihintay ang pagsusuri"
+    },
+    "checked": {
+      "en": "checked",
+      "fil": "natsek"
+    },
+    "resetProgress": {
+      "en": "Reset my saved progress",
+      "fil": "I-reset ang aking progreso"
+    },
+    "resetConfirm": {
+      "en": "Erase quiz results, badges and checklist from this device?",
+      "fil": "Burahin ang resulta ng pagsusulit, mga badge at talaan sa device na ito?"
+    },
+    "sourcesTitle": {
+      "en": "Sources used in this guide",
+      "fil": "Mga sanggunian ng gabay na ito"
+    },
+    "sourcesIntro": {
+      "en": "Every fact in the guide is tagged with one of these. Where reports disagree, the guide says so.",
+      "fil": "Bawat katotohanan sa gabay ay may tatak ng isa sa mga ito. Kapag magkaiba ang mga ulat, sinasabi ito ng gabay."
+    },
+    "reviewTitle": {
+      "en": "Review status",
+      "fil": "Katayuan ng pagsusuri"
+    },
+    "reviewText": {
+      "en": "This is a student project (MVP). The Filipino text is AI-drafted and still needs review by a native speaker, and all content still needs review by local cultural bearers or the provincial tourism office before public use.",
+      "fil": "Proyektong pang-estudyante ito (MVP). Binuo ng AI ang tekstong Filipino at kailangan pa itong suriin ng katutubong tagapagsalita, at ang lahat ng nilalaman ay kailangan pang suriin ng mga lokal na tagapagdala ng kultura o ng tanggapan ng turismo ng lalawigan bago ilabas sa publiko."
+    },
+    "loadError": {
+      "en": "The content files could not be loaded. Open this page through a web server (for example: python3 -m http.server) or GitHub Pages, not by double-clicking the file.",
+      "fil": "Hindi ma-load ang mga file ng nilalaman. Buksan ang pahinang ito sa pamamagitan ng web server (hal.: python3 -m http.server) o GitHub Pages, hindi sa pag-double-click ng file."
+    },
+    "badgeNames": {
+      "first": {
+        "en": "First Steps",
+        "fil": "Unang Hakbang"
+      },
+      "scholar": {
+        "en": "Heritage Learner",
+        "fil": "Mag-aaral ng Pamana"
+      },
+      "perfect": {
+        "en": "Perfect Score",
+        "fil": "Perpektong Iskor"
+      },
+      "visitor": {
+        "en": "Respectful Visitor",
+        "fil": "Magalang na Bisita"
+      },
+      "explorer": {
+        "en": "Costume Explorer",
+        "fil": "Taga-suri ng Kasuotan"
+      }
+    },
+    "badgeHints": {
+      "first": {
+        "en": "Finish the quiz once.",
+        "fil": "Tapusin ang pagsusulit nang isang beses."
+      },
+      "scholar": {
+        "en": "Score 7 or more out of 8.",
+        "fil": "Makakuha ng 7 o higit pa sa 8."
+      },
+      "perfect": {
+        "en": "Score 8 out of 8.",
+        "fil": "Makakuha ng 8 sa 8."
+      },
+      "visitor": {
+        "en": "Tick every item in the checklist.",
+        "fil": "Lagyan ng tsek ang lahat ng bagay sa talaan."
+      },
+      "explorer": {
+        "en": "Open all six costume parts.",
+        "fil": "Buksan ang anim na bahagi ng kasuotan."
+      }
+    },
+    "footer": {
+      "en": "Student project, MarSU BSI/T 3E, Web Systems and Technologies 1. Not an official tourism or Church publication.",
+      "fil": "Proyektong pang-estudyante, MarSU BSI/T 3E, Web Systems and Technologies 1. Hindi opisyal na publikasyon ng turismo o ng Simbahan."
+    },
+    "heroKicker": {
+      "en": "Marinduque · Holy Week",
+      "fil": "Marinduque · Mahal na Araw"
+    },
+    "heroLead": {
+      "en": "Learn the story, the rites and the meaning of the Moryonan, and how to visit with respect.",
+      "fil": "Alamin ang kuwento, ang mga ritwal at ang kahulugan ng Moryonan, at kung paano dumalaw nang may paggalang."
+    },
+    "planTitle": {
+      "en": "Plan a visit",
+      "fil": "Magplano ng pagdalaw"
+    },
+    "planIntro": {
+      "en": "Choose a day of Holy Week and a town to see what the sources report. Save items to build your own plan. Your plan stays on this device.",
+      "fil": "Pumili ng araw ng Mahal na Araw at bayan upang makita ang iniuulat ng mga sanggunian. I-save ang mga bagay upang buuin ang sarili mong plano. Nananatili ang plano sa device na ito."
+    },
+    "day": {
+      "en": "Day",
+      "fil": "Araw"
+    },
+    "town": {
+      "en": "Town",
+      "fil": "Bayan"
+    },
+    "anyTown": {
+      "en": "Any town",
+      "fil": "Anumang bayan"
+    },
+    "onDay": {
+      "en": "Reported on",
+      "fil": "Iniulat sa"
+    },
+    "inTown": {
+      "en": "Places and traditions in this town",
+      "fil": "Mga pook at tradisyon sa bayang ito"
+    },
+    "nothingDay": {
+      "en": "No events were reported for this day and town in the sources reviewed. Try another town or day.",
+      "fil": "Walang iniulat na pangyayari sa araw at bayang ito sa mga nasuring sanggunian. Subukan ang ibang bayan o araw."
+    },
+    "save": {
+      "en": "Save to my plan",
+      "fil": "I-save sa aking plano"
+    },
+    "saved": {
+      "en": "Saved",
+      "fil": "Naka-save"
+    },
+    "removeFromPlan": {
+      "en": "Remove",
+      "fil": "Alisin"
+    },
+    "myPlan": {
+      "en": "My plan",
+      "fil": "Aking plano"
+    },
+    "emptyPlan": {
+      "en": "Nothing saved yet.",
+      "fil": "Wala pang naka-save."
+    },
+    "copyLink": {
+      "en": "Copy link to this plan",
+      "fil": "Kopyahin ang link ng planong ito"
+    },
+    "copied": {
+      "en": "Link copied.",
+      "fil": "Nakopya ang link."
+    },
+    "copyFail": {
+      "en": "Could not copy automatically. The plan text is shown below: select it and press Ctrl+C.",
+      "fil": "Hindi awtomatikong makopya. Ipinapakita sa ibaba ang teksto: piliin ito at pindutin ang Ctrl+C."
+    },
+    "print": {
+      "en": "Print",
+      "fil": "I-print"
+    },
+    "tryThese": {
+      "en": "Try one of these searches:",
+      "fil": "Subukan ang isa sa mga ito:"
+    },
+    "reviewUnreviewed": {
+      "en": "Not yet reviewed by a local reviewer",
+      "fil": "Hindi pa nasusuri ng lokal na tagasuri"
+    },
+    "reviewReviewed": {
+      "en": "Reviewed by",
+      "fil": "Sinuri ni/ng"
+    },
+    "noscript": {
+      "en": "This guide needs JavaScript to run. Please turn it on in your browser.",
+      "fil": "Kailangan ng JavaScript ang gabay na ito. Paki-on ito sa iyong browser."
+    },
+    "dayAny": {
+      "en": "Any day",
+      "fil": "Anumang araw"
+    },
+    "heroCta": {
+      "en": "Turn the 3D mask",
+      "fil": "Paikutin ang 3D na maskara"
+    },
+    "viewLabel": {
+      "en": "Choose a view",
+      "fil": "Pumili ng tanaw"
+    },
+    "view3d": {
+      "en": "3D mask",
+      "fil": "3D na maskara"
+    },
+    "viewDrawing": {
+      "en": "Illustration",
+      "fil": "Guhit"
+    },
+    "m3dLoading": {
+      "en": "Loading 3D model…",
+      "fil": "Nilo-load ang 3D model…"
+    },
+    "m3dFail": {
+      "en": "The 3D view could not start in this browser, so the illustration is shown instead.",
+      "fil": "Hindi masimulan ang 3D na tanaw sa browser na ito, kaya guhit ang ipinapakita."
+    },
+    "m3dControls": {
+      "en": "3D model controls",
+      "fil": "Mga kontrol ng 3D model"
+    },
+    "m3dPause": {
+      "en": "Pause turning",
+      "fil": "Itigil ang pag-ikot"
+    },
+    "m3dPlay": {
+      "en": "Turn automatically",
+      "fil": "Awtomatikong umikot"
+    },
+    "m3dReset": {
+      "en": "Reset view",
+      "fil": "I-reset ang tanaw"
+    },
+    "m3dZoomIn": {
+      "en": "Zoom in",
+      "fil": "Palakihin"
+    },
+    "m3dZoomOut": {
+      "en": "Zoom out",
+      "fil": "Paliitin"
+    },
+    "m3dHelmet": {
+      "en": "Helmet and crest",
+      "fil": "Helmet at tuktok"
+    },
+    "m3dFlowers": {
+      "en": "Silver flowers (Mogpog style)",
+      "fil": "Mga pilak na bulaklak (istilong Mogpog)"
+    },
+    "m3dHint": {
+      "en": "Drag the mask to turn it. Click the model, then use the arrow keys to turn, + and − to zoom, R to reset. Choose \"Helmet and crest\" or \"Mask\" below to highlight that part.",
+      "fil": "I-drag ang maskara para paikutin. I-click ang model, pagkatapos gamitin ang arrow keys para umikot, + at − para mag-zoom, R para mag-reset. Piliin ang \"Helmet at tuktok\" o \"Maskara\" sa ibaba para i-highlight ito."
+    },
+    "m3dCredit": {
+      "en": "Original 3D model made for this project in code (Three.js, MIT licence). A generic traditional-style mask, not a copy of any museum object or of a particular maker's work. Not yet reviewed by a mask carver.",
+      "fil": "Orihinal na 3D model na ginawa sa code para sa proyektong ito (Three.js, lisensyang MIT). Pangkalahatang tradisyunal na istilo ng maskara, hindi kopya ng anumang bagay sa museo o ng gawa ng partikular na manlililok. Hindi pa nasusuri ng manlililok ng maskara."
+    },
+    "m3dNotModelled": {
+      "en": "This part is shown in the illustration only. The 3D model covers the mask, helmet and crest.",
+      "fil": "Sa guhit lamang ipinapakita ang bahaging ito. Sakop ng 3D model ang maskara, helmet at tuktok."
+    },
+    "m3dLabel": {
+      "en": "3D model of a Morion mask: a carved wooden scowling face with beard, a helmet with a horsehair crest. Drag to turn it.",
+      "fil": "3D model ng maskarang Morion: inukit na kahoy na mukhang galit na may balbas, helmet na may tuktok na buhok ng kabayo. I-drag para paikutin."
+    },
+    "copyText": {
+      "en": "Copy plan as text",
+      "fil": "Kopyahin ang plano bilang teksto"
+    },
+    "copiedText": {
+      "en": "Plan copied. Paste it into a message, e-mail or note.",
+      "fil": "Nakopya ang plano. I-paste ito sa mensahe, e-mail o tala."
+    },
+    "downloadTxt": {
+      "en": "Download .txt",
+      "fil": "I-download ang .txt"
+    },
+    "downloaded": {
+      "en": "Saved as moriones-visit-plan.txt in your downloads.",
+      "fil": "Nai-save bilang moriones-visit-plan.txt sa iyong downloads."
+    },
+    "showText": {
+      "en": "Show plan text (to copy by hand)",
+      "fil": "Ipakita ang teksto ng plano (para kopyahin nang mano-mano)"
+    },
+    "planTextTitle": {
+      "en": "MY MORIONES VISIT PLAN",
+      "fil": "AKING PLANO SA PAGBISITA SA MORIONES"
+    },
+    "linkNote": {
+      "en": "Links to a local copy of this page cannot be opened by other people. Share the plan as text, or put the site online first (for example GitHub Pages) to share a link.",
+      "fil": "Hindi mabubuksan ng ibang tao ang link sa lokal na kopya ng pahinang ito. Ibahagi ang plano bilang teksto, o i-publish muna ang site (hal. GitHub Pages) para makapagbahagi ng link."
+    }
+  },
+  "legend": {
+    "paragraphs": [
+      {
+        "text": {
+          "en": "The story centers on Longinus, a Roman centurion who was blind in one eye. In the account, he pierced the side of Christ to confirm that he was dead.",
+          "fil": "Ang kuwento ay tungkol kay Longinus, isang opisyal na Romano na bulag ang isang mata. Sa salaysay, tinusok niya ang tagiliran ni Kristo upang matiyak na patay na Siya."
+        },
+        "src": [
+          "philstar"
+        ]
+      },
+      {
+        "text": {
+          "en": "Blood from the wound fell on his blind eye and fully restored his sight. He was converted and proclaimed that Jesus was the Son of God. His story carries a message of faith and conversion.",
+          "fil": "Ang dugo mula sa sugat ay tumulo sa kanyang bulag na mata at lubusang ibinalik ang kanyang paningin. Nagbalik-loob siya at ipinahayag na si Hesus ay Anak ng Diyos. Ang kanyang kuwento ay may mensahe ng pananampalataya at pagbabalik-loob."
+        },
+        "src": [
+          "philstar",
+          "lenten"
+        ]
+      },
+      {
+        "text": {
+          "en": "During Holy Week, costumed Morions march through the town each day looking for Longinus. The search ends with the pugutan, the reenactment of his capture and beheading. In the reports reviewed, the pugutan is held on Easter Sunday in some towns and on other days in others (see the Holy Week timeline).",
+          "fil": "Tuwing Mahal na Araw, naglalakad araw-araw sa bayan ang mga Morion upang hanapin si Longinus. Nagtatapos ang paghahanap sa pugutan, ang muling pagsasadula ng kanyang pagkahuli at pagpugot. Sa mga ulat na nasuri, ginaganap ang pugutan tuwing Linggo ng Pagkabuhay sa ilang bayan at sa ibang araw sa iba pa (tingnan ang Takbo ng Mahal na Araw)."
+        },
+        "src": [
+          "philstar",
+          "lenten",
+          "solemn"
+        ]
+      },
+      {
+        "text": {
+          "en": "For the people who wear the costume, it is penance, thanksgiving or the fulfilment of a vow. Bishop Marcelino Antonio Maralit Jr. of Boac is quoted as saying it is \"not really a show\" but a way of remembering the life and passion of Christ.",
+          "fil": "Para sa mga nagsusuot ng kasuotan, ito ay pagpapakasakit, pasasalamat o pagtupad sa panata. Sinipi si Obispo Marcelino Antonio Maralit Jr. ng Boac na ang Moryonan ay \"hindi talaga palabas\" kundi paraan ng pag-alala sa buhay at pasyon ni Kristo."
+        },
+        "src": [
+          "solemn",
+          "penitence"
+        ]
+      }
+    ],
+    "originNote": {
+      "en": "Sources differ on when the tradition began. A scholarly study of its preservation dates the observance to the 1870s. A news report says it began in Mogpog in the 1880s, when a local priest, Dionisio Santiago, staged a reenactment of the crucifixion. The same news coverage notes earlier penitential practices, such as covering faces with charcoal and wearing costumes of seashells and coconuts, that are said to have evolved into the parade of Roman soldiers. This guide does not choose between the dates.",
+      "fil": "Magkakaiba ang sanggunian kung kailan nagsimula ang tradisyon. Ang isang pag-aaral tungkol sa pangangalaga nito ay nagtatakda ng pagsisimula noong 1870s. Ayon naman sa isang ulat sa balita, nagsimula ito sa Mogpog noong 1880s nang magsadula ang isang lokal na pari, si Dionisio Santiago, ng pagpapako sa krus. Binabanggit din ng balita ang mas naunang gawaing pagpapakasakit, tulad ng pag-uling sa mukha at pagsusuot ng kasuotang yari sa kabibe at niyog, na sinasabing naging parada ng mga sundalong Romano. Hindi pumipili ang gabay na ito sa pagitan ng mga petsa.",
+      "src": [
+        "chan",
+        "lenten",
+        "solemn"
+      ]
+    }
+  },
+  "rites": [
+    {
+      "id": "before",
+      "day": {
+        "en": "Before Holy Week",
+        "fil": "Bago ang Mahal na Araw"
+      },
+      "title": {
+        "en": "Preparation and recollection",
+        "fil": "Paghahanda at pagninilay"
+      },
+      "text": {
+        "en": "In Mogpog, penitents are encouraged to attend a Church recollection before Holy Week.",
+        "fil": "Sa Mogpog, hinihikayat ang mga nagpapakasakit na dumalo sa pagninilay ng Simbahan bago ang Mahal na Araw."
+      },
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "palm",
+      "day": {
+        "en": "Palm Sunday to Holy Wednesday",
+        "fil": "Linggo ng Palaspas hanggang Miyerkules Santo"
+      },
+      "title": {
+        "en": "Estacion general",
+        "fil": "Estacion general"
+      },
+      "text": {
+        "en": "Makeshift altars for the Stations of the Cross are set up in the late afternoons in all towns.",
+        "fil": "Sa hapon, nagtatayo ng pansamantalang altar para sa Estasyon ng Krus sa lahat ng bayan."
+      },
+      "src": [
+        "lenten"
+      ]
+    },
+    {
+      "id": "monday",
+      "day": {
+        "en": "Holy Monday",
+        "fil": "Lunes Santo"
+      },
+      "title": {
+        "en": "Morions begin to walk",
+        "fil": "Nagsisimulang maglakad ang mga Morion"
+      },
+      "text": {
+        "en": "Morions walk the streets from Holy Monday and take part in religious activities until Easter Sunday. A parade was reported on the morning of Holy Monday.",
+        "fil": "Naglalakad sa mga lansangan ang mga Morion mula Lunes Santo at sumasali sa mga gawaing panrelihiyon hanggang Linggo ng Pagkabuhay. May parada na iniulat sa umaga ng Lunes Santo."
+      },
+      "src": [
+        "penitence",
+        "lenten"
+      ]
+    },
+    {
+      "id": "wed",
+      "day": {
+        "en": "Holy Wednesday and Maundy Thursday",
+        "fil": "Miyerkules Santo at Huwebes Santo"
+      },
+      "title": {
+        "en": "Cenaculo in Boac",
+        "fil": "Senakulo sa Boac"
+      },
+      "text": {
+        "en": "A stage play of the events leading to the crucifixion is performed at the Moriones Arena in Boac, in the evenings of Holy Wednesday and Maundy Thursday.",
+        "fil": "Itinatanghal sa Moriones Arena sa Boac ang dula tungkol sa mga pangyayari bago ang pagpapako sa krus, sa gabi ng Miyerkules Santo at Huwebes Santo."
+      },
+      "src": [
+        "penitence",
+        "lenten"
+      ]
+    },
+    {
+      "id": "thu",
+      "day": {
+        "en": "Holy Thursday, 4 p.m.",
+        "fil": "Huwebes Santo, ika-4 ng hapon"
+      },
+      "title": {
+        "en": "Battle of the Morions, Santa Cruz",
+        "fil": "Labanan ng mga Morion, Santa Cruz"
+      },
+      "text": {
+        "en": "Reported at the Santa Cruz plaza at 4 p.m. on Holy Thursday.",
+        "fil": "Iniulat sa plaza ng Santa Cruz, ika-4 ng hapon ng Huwebes Santo."
+      },
+      "src": [
+        "lenten"
+      ]
+    },
+    {
+      "id": "fri",
+      "day": {
+        "en": "Good Friday",
+        "fil": "Biyernes Santo"
+      },
+      "title": {
+        "en": "Via Crucis, procession and penance",
+        "fil": "Via Crucis, prusisyon at pagpapakasakit"
+      },
+      "text": {
+        "en": "In Boac, Kristo carries a heavy wooden cross through town during the Via Crucis in the morning. Morions take part in the Good Friday procession of religious images as a vow. In Santa Cruz the pugutan is reported on Good Friday night. In Gasan, flagellants perform penance at the old cemetery.",
+        "fil": "Sa Boac, pasan ni Kristo ang mabigat na krus na kahoy sa bayan sa Via Crucis tuwing umaga. Sumasama ang mga Morion sa prusisyon ng mga imahen sa Biyernes Santo bilang panata. Sa Santa Cruz, iniulat ang pugutan sa gabi ng Biyernes Santo. Sa Gasan, nagpapakasakit ang mga flagellant sa lumang sementeryo."
+      },
+      "src": [
+        "penitence",
+        "lenten",
+        "philstar"
+      ]
+    },
+    {
+      "id": "sat",
+      "day": {
+        "en": "Black Saturday",
+        "fil": "Sabado de Gloria"
+      },
+      "title": {
+        "en": "Pugutan in Boac and Gasan",
+        "fil": "Pugutan sa Boac at Gasan"
+      },
+      "text": {
+        "en": "The pugutan, usually held at night, is reported in Boac and Gasan on Black Saturday.",
+        "fil": "Ang pugutan, na karaniwang sa gabi, ay iniulat sa Boac at Gasan tuwing Sabado de Gloria."
+      },
+      "src": [
+        "lenten"
+      ]
+    },
+    {
+      "id": "sun",
+      "day": {
+        "en": "Easter Sunday",
+        "fil": "Linggo ng Pagkabuhay"
+      },
+      "title": {
+        "en": "Pugutan in Mogpog and Torrijos",
+        "fil": "Pugutan sa Mogpog at Torrijos"
+      },
+      "text": {
+        "en": "The pugutan is reported in Mogpog and Torrijos on Easter Sunday, and a reenactment of the crucifixion and resurrection is described at the Town Plaza. The cenaculo in Boac also continues after the midnight Mass.",
+        "fil": "Iniulat ang pugutan sa Mogpog at Torrijos tuwing Linggo ng Pagkabuhay, at inilarawan ang muling pagsasadula ng pagpapako at muling pagkabuhay sa Plaza ng Bayan. Nagpapatuloy rin ang senakulo sa Boac pagkatapos ng Misa de Gallo ng hatinggabi."
+      },
+      "src": [
+        "lenten",
+        "philstar",
+        "solemn"
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "id": "crest",
+      "name": {
+        "en": "Helmet and crest",
+        "fil": "Helmet at tuktok"
+      },
+      "text": {
+        "en": "The mask is topped by a helmet and a crest made of horsehair. In Mogpog the helmet may be a \"bulaklakan\" with tinfoil flowers. Each flower stands for a year of penance or a wish, and one is removed when the wish is granted.",
+        "fil": "May helmet sa ibabaw ng maskara at tuktok na yari sa buhok ng kabayo. Sa Mogpog, maaaring \"bulaklakan\" ang helmet na may mga bulaklak na yari sa tinfoil. Ang bawat bulaklak ay sumisimbolo sa isang taon ng pagpapakasakit o isang kahilingan, at tinatanggal ang isa kapag natupad ang hiling."
+      },
+      "src": [
+        "solemn",
+        "penitence"
+      ]
+    },
+    {
+      "id": "mask",
+      "name": {
+        "en": "Mask",
+        "fil": "Maskara"
+      },
+      "text": {
+        "en": "A wooden mask showing a scowling Roman soldier, often bearded. It is carved from santol or dapdap wood, with eyelashes of human hair and only two small eye holes. Carving takes about three days. Some makers now use papier-mâché molds for cheaper souvenir masks.",
+        "fil": "Maskarang kahoy na may nakasimangot na sundalong Romano, madalas may balbas. Inuukit ito sa kahoy na santol o dapdap, may pilik-mata na yari sa buhok ng tao at dalawang maliit na butas lamang para sa mata. Mga tatlong araw ang pag-ukit. May ilang gumagawa na ngayon na gumagamit ng papier-mâché para sa mas murang souvenir na maskara."
+      },
+      "src": [
+        "solemn",
+        "philstar",
+        "lenten"
+      ]
+    },
+    {
+      "id": "breastplate",
+      "name": {
+        "en": "Breastplate",
+        "fil": "Baluti sa dibdib"
+      },
+      "text": {
+        "en": "Part of the Roman soldier costume. Older costumes used cloth, shells, nito vine weaves and other indigenous materials. Modern armor is described as fiberglass or stainless steel.",
+        "fil": "Bahagi ng kasuotang sundalong Romano. Sa mas lumang kasuotan, ginamit ang tela, kabibe, hinabing nito at iba pang katutubong materyales. Ang makabagong baluti ay inilalarawan na yari sa fiberglass o stainless steel."
+      },
+      "src": [
+        "solemn",
+        "lenten",
+        "philstar"
+      ]
+    },
+    {
+      "id": "cape",
+      "name": {
+        "en": "Cape",
+        "fil": "Kapa"
+      },
+      "text": {
+        "en": "A cape is worn with the breastplate. The whole costume is hot and stifling, and the reports describe enduring it, along with hunger and thirst during a long walk, as part of the penance.",
+        "fil": "Isinusuot ang kapa kasama ng baluti. Mainit at nakasasakal ang buong kasuotan, at inilalarawan ng mga ulat na ang pagtitiis dito, kasama ang gutom at uhaw sa mahabang lakad, ay bahagi ng pagpapakasakit."
+      },
+      "src": [
+        "solemn",
+        "philstar",
+        "lenten"
+      ]
+    },
+    {
+      "id": "weapons",
+      "name": {
+        "en": "Sword, spear and shield",
+        "fil": "Espada, sibat at kalasag"
+      },
+      "text": {
+        "en": "Morions carry props: a painted wooden sword, a spear and a shield.",
+        "fil": "May dalang props ang mga Morion: espadang kahoy na may pintura, sibat at kalasag."
+      },
+      "src": [
+        "lenten",
+        "solemn"
+      ]
+    },
+    {
+      "id": "sandals",
+      "name": {
+        "en": "Sandals",
+        "fil": "Sandalyas"
+      },
+      "text": {
+        "en": "Sandals complete the costume. The wearer walks around town for long hours, which is part of the penance.",
+        "fil": "Kumukumpleto ng kasuotan ang sandalyas. Mahabang oras na naglalakad sa bayan ang nagsusuot, na bahagi ng pagpapakasakit."
+      },
+      "src": [
+        "solemn",
+        "lenten"
+      ]
+    }
+  ],
+  "directory": [
+    {
+      "id": "d1",
+      "name": {
+        "en": "Morion parade and daily search for Longinus",
+        "fil": "Parada ng mga Morion at araw-araw na paghahanap kay Longinus"
+      },
+      "category": "rite",
+      "when": {
+        "en": "From Holy Monday to Easter Sunday",
+        "fil": "Mula Lunes Santo hanggang Linggo ng Pagkabuhay"
+      },
+      "where": {
+        "en": "Streets of the island's towns",
+        "fil": "Mga lansangan ng mga bayan sa isla"
+      },
+      "text": {
+        "en": "Costumed Morions walk through town looking for Longinus.",
+        "fil": "Naglalakad sa bayan ang mga Morion upang hanapin si Longinus."
+      },
+      "typical": true,
+      "src": [
+        "penitence",
+        "philstar"
+      ],
+      "towns": [
+        "island"
+      ],
+      "days": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri",
+        "sat",
+        "sun"
+      ]
+    },
+    {
+      "id": "d2",
+      "name": {
+        "en": "Cenaculo (Passion play)",
+        "fil": "Senakulo"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Holy Wednesday and Maundy Thursday evenings; Good Friday morning; after the Easter midnight Mass",
+        "fil": "Gabi ng Miyerkules Santo at Huwebes Santo; umaga ng Biyernes Santo; pagkatapos ng Misa ng hatinggabi ng Pagkabuhay"
+      },
+      "where": {
+        "en": "Moriones Arena, Boac",
+        "fil": "Moriones Arena, Boac"
+      },
+      "text": {
+        "en": "A stage play of the events leading to the crucifixion, with a cast of volunteers.",
+        "fil": "Dula tungkol sa mga pangyayari bago ang pagpapako sa krus, na itinatanghal ng mga boluntaryo."
+      },
+      "typical": true,
+      "src": [
+        "lenten",
+        "penitence"
+      ],
+      "towns": [
+        "boac"
+      ],
+      "days": [
+        "wed",
+        "thu",
+        "fri",
+        "sun"
+      ]
+    },
+    {
+      "id": "d3",
+      "name": {
+        "en": "Via Crucis",
+        "fil": "Via Crucis"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Good Friday morning",
+        "fil": "Umaga ng Biyernes Santo"
+      },
+      "where": {
+        "en": "Streets of Boac",
+        "fil": "Mga lansangan ng Boac"
+      },
+      "text": {
+        "en": "Kristo carries a heavy wooden cross through town.",
+        "fil": "Pasan ni Kristo ang mabigat na krus na kahoy sa bayan."
+      },
+      "typical": true,
+      "src": [
+        "lenten",
+        "penitence"
+      ],
+      "towns": [
+        "boac"
+      ],
+      "days": [
+        "fri"
+      ]
+    },
+    {
+      "id": "d4",
+      "name": {
+        "en": "Battle of the Morions",
+        "fil": "Labanan ng mga Morion"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Holy Thursday, 4 p.m.",
+        "fil": "Huwebes Santo, ika-4 ng hapon"
+      },
+      "where": {
+        "en": "Santa Cruz plaza",
+        "fil": "Plaza ng Santa Cruz"
+      },
+      "text": {
+        "en": "A Holy Thursday event reported in Santa Cruz.",
+        "fil": "Pangyayaring iniulat sa Santa Cruz tuwing Huwebes Santo."
+      },
+      "typical": true,
+      "src": [
+        "lenten"
+      ],
+      "towns": [
+        "santacruz"
+      ],
+      "days": [
+        "thu"
+      ]
+    },
+    {
+      "id": "d5",
+      "name": {
+        "en": "Pugutan, Santa Cruz",
+        "fil": "Pugutan, Santa Cruz"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Good Friday, usually at night",
+        "fil": "Biyernes Santo, karaniwang sa gabi"
+      },
+      "where": {
+        "en": "Santa Cruz",
+        "fil": "Santa Cruz"
+      },
+      "text": {
+        "en": "The reenactment of the capture and beheading of Longinus.",
+        "fil": "Ang muling pagsasadula ng pagkahuli at pagpugot kay Longinus."
+      },
+      "typical": true,
+      "src": [
+        "lenten"
+      ],
+      "towns": [
+        "santacruz"
+      ],
+      "days": [
+        "fri"
+      ]
+    },
+    {
+      "id": "d6",
+      "name": {
+        "en": "Pugutan, Boac and Gasan",
+        "fil": "Pugutan, Boac at Gasan"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Black Saturday, usually at night",
+        "fil": "Sabado de Gloria, karaniwang sa gabi"
+      },
+      "where": {
+        "en": "Boac and Gasan",
+        "fil": "Boac at Gasan"
+      },
+      "text": {
+        "en": "The pugutan is reported in both towns on Black Saturday. It is listed under Boac; Gasan has its own entry for the old cemetery.",
+        "fil": "Iniulat ang pugutan sa dalawang bayan tuwing Sabado de Gloria. Nakalista ito sa Boac; may hiwalay na tala ang Gasan para sa lumang sementeryo."
+      },
+      "typical": true,
+      "src": [
+        "lenten"
+      ],
+      "towns": [
+        "boac",
+        "gasan"
+      ],
+      "days": [
+        "sat"
+      ]
+    },
+    {
+      "id": "d7",
+      "name": {
+        "en": "Pugutan, Mogpog and Torrijos",
+        "fil": "Pugutan, Mogpog at Torrijos"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Easter Sunday",
+        "fil": "Linggo ng Pagkabuhay"
+      },
+      "where": {
+        "en": "Mogpog and Torrijos",
+        "fil": "Mogpog at Torrijos"
+      },
+      "text": {
+        "en": "The pugutan is reported in both towns on Easter Sunday. It is listed under Mogpog.",
+        "fil": "Iniulat ang pugutan sa dalawang bayan tuwing Linggo ng Pagkabuhay. Nakalista ito sa Mogpog."
+      },
+      "typical": true,
+      "src": [
+        "lenten",
+        "solemn"
+      ],
+      "towns": [
+        "mogpog",
+        "torrijos"
+      ],
+      "days": [
+        "sun"
+      ]
+    },
+    {
+      "id": "d8",
+      "name": {
+        "en": "Estacion general",
+        "fil": "Estacion general"
+      },
+      "category": "rite",
+      "when": {
+        "en": "Late afternoons, Palm Sunday to Holy Wednesday",
+        "fil": "Hapon, Linggo ng Palaspas hanggang Miyerkules Santo"
+      },
+      "where": {
+        "en": "All towns",
+        "fil": "Lahat ng bayan"
+      },
+      "text": {
+        "en": "Makeshift altars for the Stations of the Cross.",
+        "fil": "Mga pansamantalang altar para sa Estasyon ng Krus."
+      },
+      "typical": true,
+      "src": [
+        "lenten"
+      ],
+      "towns": [
+        "island"
+      ],
+      "days": [
+        "palm",
+        "mon",
+        "tue",
+        "wed"
+      ]
+    },
+    {
+      "id": "d9",
+      "name": {
+        "en": "Bulaklakan helmet tradition",
+        "fil": "Tradisyon ng helmet na bulaklakan"
+      },
+      "category": "tradition",
+      "when": {
+        "en": "During the Lenten season",
+        "fil": "Sa panahon ng Kuwaresma"
+      },
+      "where": {
+        "en": "Mogpog",
+        "fil": "Mogpog"
+      },
+      "text": {
+        "en": "Helmets decorated with tinfoil flowers. Each flower stands for a year of penance or a wish.",
+        "fil": "Mga helmet na may palamuting bulaklak na tinfoil. Ang bawat bulaklak ay sumisimbolo sa isang taon ng pagpapakasakit o isang hiling."
+      },
+      "typical": false,
+      "src": [
+        "solemn",
+        "penitence"
+      ],
+      "towns": [
+        "mogpog"
+      ],
+      "days": [
+        "any"
+      ]
+    },
+    {
+      "id": "d10",
+      "name": {
+        "en": "Cathedral of the Immaculate Conception (Boac Cathedral)",
+        "fil": "Katedral ng Immaculate Conception (Katedral ng Boac)"
+      },
+      "category": "site",
+      "when": {
+        "en": "Check Mass and visiting hours locally",
+        "fil": "Alamin sa lugar ang oras ng Misa at pagdalaw"
+      },
+      "where": {
+        "en": "Boac",
+        "fil": "Boac"
+      },
+      "text": {
+        "en": "Built in 1792 and declared an Important Cultural Property by the National Museum of the Philippines. It has long been a center of faith in the province.",
+        "fil": "Itinayo noong 1792 at idineklarang Important Cultural Property ng National Museum of the Philippines. Matagal na itong sentro ng pananampalataya sa lalawigan."
+      },
+      "typical": false,
+      "src": [
+        "mb"
+      ],
+      "towns": [
+        "boac"
+      ],
+      "days": [
+        "any"
+      ]
+    },
+    {
+      "id": "d11",
+      "name": {
+        "en": "Moriones Arena",
+        "fil": "Moriones Arena"
+      },
+      "category": "site",
+      "when": {
+        "en": "Cenaculo schedule above",
+        "fil": "Ayon sa iskedyul ng senakulo sa itaas"
+      },
+      "where": {
+        "en": "Boac",
+        "fil": "Boac"
+      },
+      "text": {
+        "en": "Venue of the cenaculo in Boac.",
+        "fil": "Pook ng senakulo sa Boac."
+      },
+      "typical": false,
+      "src": [
+        "penitence",
+        "lenten"
+      ],
+      "towns": [
+        "boac"
+      ],
+      "days": [
+        "wed",
+        "thu",
+        "fri",
+        "sun"
+      ]
+    },
+    {
+      "id": "d12",
+      "name": {
+        "en": "Old cemetery of Gasan",
+        "fil": "Lumang sementeryo ng Gasan"
+      },
+      "category": "site",
+      "when": {
+        "en": "Good Friday",
+        "fil": "Biyernes Santo"
+      },
+      "where": {
+        "en": "Gasan",
+        "fil": "Gasan"
+      },
+      "text": {
+        "en": "Reported as the place where flagellants perform penance on Good Friday.",
+        "fil": "Iniulat bilang lugar kung saan nagpapakasakit ang mga flagellant tuwing Biyernes Santo."
+      },
+      "typical": true,
+      "src": [
+        "lenten"
+      ],
+      "towns": [
+        "gasan"
+      ],
+      "days": [
+        "fri"
+      ]
+    }
+  ],
+  "filters": {
+    "municipality": {
+      "boac": {
+        "en": "Boac",
+        "fil": "Boac"
+      },
+      "gasan": {
+        "en": "Gasan",
+        "fil": "Gasan"
+      },
+      "mogpog": {
+        "en": "Mogpog",
+        "fil": "Mogpog"
+      },
+      "santacruz": {
+        "en": "Santa Cruz",
+        "fil": "Santa Cruz"
+      },
+      "torrijos": {
+        "en": "Torrijos",
+        "fil": "Torrijos"
+      },
+      "island": {
+        "en": "Island-wide",
+        "fil": "Buong isla"
+      }
+    },
+    "category": {
+      "rite": {
+        "en": "Rite or event",
+        "fil": "Ritwal o pangyayari"
+      },
+      "tradition": {
+        "en": "Tradition",
+        "fil": "Tradisyon"
+      },
+      "site": {
+        "en": "Heritage site",
+        "fil": "Pook-pamana"
+      }
+    }
+  },
+  "quiz": [
+    {
+      "id": "q1",
+      "q": {
+        "en": "Who is the central figure of the Moriones story?",
+        "fil": "Sino ang pangunahing tauhan sa kuwento ng Moriones?"
+      },
+      "options": [
+        {
+          "en": "Longinus, a Roman centurion",
+          "fil": "Si Longinus, isang opisyal na Romano"
+        },
+        {
+          "en": "Pontius Pilate",
+          "fil": "Si Poncio Pilato"
+        },
+        {
+          "en": "Saint Peter",
+          "fil": "Si San Pedro"
+        },
+        {
+          "en": "Herod",
+          "fil": "Si Herodes"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "The tradition follows Longinus, who is searched for by the Morions throughout Holy Week.",
+        "fil": "Si Longinus ang sinusundan ng tradisyon at siya ang hinahanap ng mga Morion sa buong Mahal na Araw."
+      },
+      "src": [
+        "philstar"
+      ]
+    },
+    {
+      "q": {
+        "en": "What restored the sight of Longinus in the story?",
+        "fil": "Ano ang nagbalik ng paningin ni Longinus sa kuwento?"
+      },
+      "id": "q2",
+      "options": [
+        {
+          "en": "Blood from Christ's wound that fell on his blind eye",
+          "fil": "Dugo mula sa sugat ni Kristo na tumulo sa kanyang bulag na mata"
+        },
+        {
+          "en": "Water from a river",
+          "fil": "Tubig mula sa ilog"
+        },
+        {
+          "en": "A doctor's treatment",
+          "fil": "Gamot ng isang manggagamot"
+        },
+        {
+          "en": "A prayer by the soldiers",
+          "fil": "Panalangin ng mga sundalo"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "The account says the blood fully restored his sight and led to his conversion.",
+        "fil": "Ayon sa salaysay, ang dugo ay lubusang nagbalik ng kanyang paningin at nagdulot ng kanyang pagbabalik-loob."
+      },
+      "src": [
+        "philstar"
+      ]
+    },
+    {
+      "id": "q3",
+      "q": {
+        "en": "What is the pugutan?",
+        "fil": "Ano ang pugutan?"
+      },
+      "options": [
+        {
+          "en": "A reenactment of the capture and beheading of Longinus",
+          "fil": "Muling pagsasadula ng pagkahuli at pagpugot kay Longinus"
+        },
+        {
+          "en": "A mask-carving contest",
+          "fil": "Paligsahan sa pag-ukit ng maskara"
+        },
+        {
+          "en": "A street dance competition",
+          "fil": "Paligsahan sa sayaw sa kalye"
+        },
+        {
+          "en": "A food fair",
+          "fil": "Handaan ng pagkain"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "The pugutan is the reenactment that ends the search for Longinus.",
+        "fil": "Ang pugutan ang muling pagsasadula na nagtatapos sa paghahanap kay Longinus."
+      },
+      "src": [
+        "philstar",
+        "solemn"
+      ]
+    },
+    {
+      "id": "q4",
+      "q": {
+        "en": "Which woods are named for carving the masks?",
+        "fil": "Anong mga kahoy ang binanggit na ginagamit sa pag-ukit ng maskara?"
+      },
+      "options": [
+        {
+          "en": "Santol or dapdap",
+          "fil": "Santol o dapdap"
+        },
+        {
+          "en": "Narra or molave",
+          "fil": "Narra o molave"
+        },
+        {
+          "en": "Bamboo or rattan",
+          "fil": "Kawayan o rattan"
+        },
+        {
+          "en": "Coconut or mahogany",
+          "fil": "Niyog o mahogany"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "Masks are carved from santol or dapdap wood, with a crest of horsehair and eyelashes of human hair.",
+        "fil": "Inuukit ang maskara sa kahoy na santol o dapdap, may tuktok na buhok ng kabayo at pilik-mata na buhok ng tao."
+      },
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "q5",
+      "q": {
+        "en": "Church and local officials prefer to call the tradition by what name instead of \"festival\"?",
+        "fil": "Anong pangalan ang mas gustong gamitin ng Simbahan at mga opisyal ng lokal kaysa sa \"pista\" o \"festival\"?"
+      },
+      "options": [
+        {
+          "en": "Moryonan",
+          "fil": "Moryonan"
+        },
+        {
+          "en": "Carnival",
+          "fil": "Karnabal"
+        },
+        {
+          "en": "Fiesta",
+          "fil": "Pista"
+        },
+        {
+          "en": "Parade of Lights",
+          "fil": "Parada ng mga Ilaw"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "The traditional name is Moryonan. The report quotes the Church as saying that touristic attention has shifted \"from Jesus to the Roman soldiers\".",
+        "fil": "Ang tradisyonal na pangalan ay Moryonan. Ayon sa ulat, sinabi ng Simbahan na ang atensyong pangturista ay lumipat \"mula kay Hesus patungo sa mga sundalong Romano\"."
+      },
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "q6",
+      "q": {
+        "en": "In the Mogpog bulaklakan helmet, what does each tinfoil flower stand for?",
+        "fil": "Sa helmet na bulaklakan ng Mogpog, ano ang sinisimbolo ng bawat bulaklak na tinfoil?"
+      },
+      "options": [
+        {
+          "en": "A year of penance or a wish",
+          "fil": "Isang taon ng pagpapakasakit o isang hiling"
+        },
+        {
+          "en": "A visitor who came to the town",
+          "fil": "Isang bisitang dumalaw sa bayan"
+        },
+        {
+          "en": "A prize won in a contest",
+          "fil": "Isang premyong napanalunan"
+        },
+        {
+          "en": "A family member who has passed",
+          "fil": "Isang yumaong kaanak"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "One flower is removed when a wish is granted.",
+        "fil": "Tinatanggal ang isang bulaklak kapag natupad ang hiling."
+      },
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "q7",
+      "q": {
+        "en": "Mogpog Resolution No. 29-2017 penalizes which behavior?",
+        "fil": "Anong gawain ang pinaparusahan ng Resolusyon Blg. 29-2017 ng Mogpog?"
+      },
+      "options": [
+        {
+          "en": "Indiscriminate display of Morion masks and costumes at private parties or non-Lenten government events",
+          "fil": "Walang pakundangang pagpapakita ng maskara at kasuotang Morion sa pribadong handaan o sa mga pagtitipon ng pamahalaan na hindi pang-Kuwaresma"
+        },
+        {
+          "en": "Carving masks from wood",
+          "fil": "Pag-ukit ng maskara sa kahoy"
+        },
+        {
+          "en": "Walking during Holy Week",
+          "fil": "Paglalakad tuwing Mahal na Araw"
+        },
+        {
+          "en": "Attending the cenaculo",
+          "fil": "Pagdalo sa senakulo"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "The report describes the resolution as penalizing the \"indiscriminate display\" of the masks and costumes outside Lenten observance.",
+        "fil": "Inilalarawan ng ulat na pinaparusahan ng resolusyon ang \"walang pakundangang pagpapakita\" ng mga maskara at kasuotan sa labas ng pagdiriwang ng Kuwaresma."
+      },
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "q8",
+      "q": {
+        "en": "Bishop Maralit says the mask makes \"no distinction\". What does this mean for the penitents?",
+        "fil": "Sabi ni Obispo Maralit, walang \"pagkakaiba\" ang maskara. Ano ang kahulugan nito para sa mga nagpapakasakit?"
+      },
+      "options": [
+        {
+          "en": "Rich and poor, young and old are equal as penitents",
+          "fil": "Pantay-pantay bilang mga nagpapakasakit ang mayaman at mahirap, bata at matanda"
+        },
+        {
+          "en": "All masks look exactly the same",
+          "fil": "Magkakapareho ang hitsura ng lahat ng maskara"
+        },
+        {
+          "en": "Only priests may wear the mask",
+          "fil": "Mga pari lamang ang puwedeng magsuot ng maskara"
+        },
+        {
+          "en": "The mask hides the wearer's age so they may be paid",
+          "fil": "Itinatago ng maskara ang edad ng nagsusuot upang mabayaran"
+        }
+      ],
+      "answer": 0,
+      "why": {
+        "en": "Behind the mask, the wearers are penitents on an equal footing.",
+        "fil": "Sa likod ng maskara, magkakapantay ang mga nagsusuot bilang mga nagpapakasakit."
+      },
+      "src": [
+        "solemn"
+      ]
+    }
+  ],
+  "etiquette": [
+    {
+      "id": "e1",
+      "text": {
+        "en": "Call it the Moryonan, or a Lenten tradition, not a party or a festival of fun. Officials are quoted as saying \"You don't come here to be merry.\"",
+        "fil": "Tawagin itong Moryonan, o tradisyon ng Kuwaresma, hindi pista ng kasiyahan. Sinipi ang isang opisyal: \"Hindi ka pumupunta rito para magsaya.\""
+      },
+      "type": "sourced",
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "e2",
+      "text": {
+        "en": "Understand that wearing the mask is penance, thanksgiving or a vow. The costume is hot and stifling, and the wearer may be fasting or thirsty.",
+        "fil": "Unawain na ang pagsusuot ng maskara ay pagpapakasakit, pasasalamat o panata. Mainit at nakasasakal ang kasuotan, at maaaring nag-aayuno o nauuhaw ang nagsusuot."
+      },
+      "type": "sourced",
+      "src": [
+        "philstar",
+        "lenten",
+        "solemn"
+      ]
+    },
+    {
+      "id": "e3",
+      "text": {
+        "en": "Do not wear Morion masks or costumes at parties or at events unrelated to Lent. Mogpog has a resolution against indiscriminate display.",
+        "fil": "Huwag magsuot ng maskara o kasuotang Morion sa handaan o sa mga pagtitipon na walang kaugnayan sa Kuwaresma. May resolusyon ang Mogpog laban sa walang pakundangang pagpapakita."
+      },
+      "type": "sourced",
+      "src": [
+        "solemn"
+      ]
+    },
+    {
+      "id": "e4",
+      "text": {
+        "en": "Treat the pugutan, Via Crucis and processions as acts of worship. Stay quiet and keep a respectful distance, especially at private acts of penance such as those at the Gasan old cemetery.",
+        "fil": "Ituring na pagsamba ang pugutan, Via Crucis at mga prusisyon. Manatiling tahimik at magpanatili ng magalang na layo, lalo na sa mga pribadong pagpapakasakit tulad ng sa lumang sementeryo ng Gasan."
+      },
+      "type": "pending",
+      "src": []
+    },
+    {
+      "id": "e5",
+      "text": {
+        "en": "Ask permission before photographing or filming a penitent up close, and follow the instructions of organizers and church staff.",
+        "fil": "Magpaalam bago kumuha ng larawan o video ng nagpapakasakit nang malapitan, at sundin ang tagubilin ng mga tagapag-ayos at kawani ng simbahan."
+      },
+      "type": "pending",
+      "src": []
+    },
+    {
+      "id": "e6",
+      "text": {
+        "en": "Check the current year's schedule with the Diocese of Boac or the provincial tourism office, because times and places change.",
+        "fil": "Alamin ang iskedyul ngayong taon sa Diyosesis ng Boac o sa tanggapan ng turismo ng lalawigan, dahil nagbabago ang oras at lugar."
+      },
+      "type": "pending",
+      "src": []
+    }
+  ],
+  "days": [
+    {
+      "id": "palm",
+      "en": "Palm Sunday",
+      "fil": "Linggo ng Palaspas"
+    },
+    {
+      "id": "mon",
+      "en": "Holy Monday",
+      "fil": "Lunes Santo"
+    },
+    {
+      "id": "tue",
+      "en": "Holy Tuesday",
+      "fil": "Martes Santo"
+    },
+    {
+      "id": "wed",
+      "en": "Holy Wednesday",
+      "fil": "Miyerkules Santo"
+    },
+    {
+      "id": "thu",
+      "en": "Holy Thursday",
+      "fil": "Huwebes Santo"
+    },
+    {
+      "id": "fri",
+      "en": "Good Friday",
+      "fil": "Biyernes Santo"
+    },
+    {
+      "id": "sat",
+      "en": "Black Saturday",
+      "fil": "Sabado de Gloria"
+    },
+    {
+      "id": "sun",
+      "en": "Easter Sunday",
+      "fil": "Linggo ng Pagkabuhay"
+    }
+  ],
+  "suggestions": [
+    "pugutan",
+    "cenaculo",
+    "Boac",
+    "cathedral"
+  ]
+}
