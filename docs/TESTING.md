@@ -62,4 +62,21 @@ Run in Chromium with Playwright. 3D checks used a **software renderer (SwiftShad
 | 32 | 3D mask loads on Home and Learn → Anatomy; no console errors; canvas has a text label; Illustration/3D switch; helmet and flowers toggles (flowers disabled when helmet is off); crest highlight; "not modelled" note for other parts | Pass (software renderer) |
 | 33 | WebGL unavailable: Anatomy shows the illustration (6 hotspots) with a message; the home hero keeps the drawing; no errors | Pass |
 | 34 | axe-core (WCAG 2.x A/AA) on 7 views x light/dark at 1440x900, including the 3D views | 0 violations (first run found 1 label mismatch on the logo link; fixed) |
+### v8 pre-hosting audit (10 Nov 2026)
+Checks run in headless Chromium (Playwright) on 10 November 2026 before publishing to GitHub Pages or Vercel. The official Vercel web-interface-guidelines file could not be fetched from the build environment, so the guideline check used the usual rule areas (accessibility, forms, focus, performance, metadata), not the fetched text.
+
+| # | Check | Result |
+|---|---|---|
+| 35 | Quiz answer position: before the fix every question had the right answer as option A (clicking A scored 8/8); after the fix the options are shuffled per run (3 runs x 8 questions gave positions 0-3 mixed), and the right option is still marked right by its text | Fixed, Pass |
+| 36 | Corrupted saved data (not JSON, `"x"`, `null`, `parts` as a number, `etiquette` null, `plan` as a string, `badges` null, mixed types): before the fix 4 of these made every page show "content could not be loaded"; after the fix all views load and bad values fall back to defaults | Fixed, Pass |
+| 37 | Heading structure: exactly one `<h1>` on each of 7 views; no skipped heading levels (axe best-practice rules) | Fixed, Pass |
+| 38 | Browser tab title changes per page ("Directory · Moriones Heritage Guide", ...) and follows the language | Fixed, Pass |
+| 39 | Crafted links `?town=constructor`, `?cat=__proto__`, `?ids=constructor,__proto__`, `?day=toString`, bad `%` escapes, `?q=<img onerror>`: no errors, filters fall back to "All", no HTML injected | Fixed, Pass |
+| 40 | Data loading: online only `content.json` is requested; if it is blocked the page falls back to `content.js`; `file://` still works (12 directory cards, no page errors) | Pass |
+| 41 | 3D: switching EN/FIL on the home page keeps the same canvas (no new WebGL context); 8 round trips between pages leave exactly 1 canvas and no console errors; a failed script download can be retried | Pass (software renderer) |
+| 42 | Layout at 1280x720, 1366x768, 1920x1080, 1024x768, 820x1180, 390x844: no horizontal scroll; header is one 76 px row at 1366 wide (was 161 px) and sticky above 1100 px; hero fits one screen at 1366x768; Anatomy 3D viewer ends at about y=826 (the old figure box ended at y=1307) | Pass (screenshots viewed) |
+| 43 | axe-core WCAG 2.x A/AA plus best-practice rules, 7 views x light/dark, 3D blocked | 0 violations (the first run found 2 best-practice issues: heading order and a notice outside any landmark; fixed) |
+
+Not tested: Firefox and Safari, a real phone, print output after the header change, 3D speed on a real graphics card.
+
 Manual checks still needed on the group's own computers (Windows, Edge/Chrome, real GPU): speed of the 3D view, that the mask looks right, that copy-to-clipboard works.

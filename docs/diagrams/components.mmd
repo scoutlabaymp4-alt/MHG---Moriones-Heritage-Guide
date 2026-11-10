@@ -1,0 +1,33 @@
+flowchart TB
+  U(["User's browser (desktop / laptop)"])
+  subgraph FE ["Static front end: no server, no database"]
+    direction TB
+    IDX["index.html<br/>page shell, landmarks"]
+    CSS["css/styles.css<br/>design system, light / dark"]
+    FN["assets/fonts<br/>self-hosted"]
+    subgraph APP ["js/app.js (vanilla JavaScript)"]
+      direction LR
+      RT["Router<br/>hash + query"] --> VW["Views<br/>Learn · Directory · Plan<br/>Quiz · Sources"]
+      VW --> I18["Language<br/>EN / FIL"]
+      VW --> ST["Guarded<br/>storage"]
+    end
+    DAT["data/content.json<br/>+ content.js fallback<br/>bilingual, source-tagged"]
+    M3["js/mask3d.js<br/>Three.js / WebGL<br/>lazy-loaded"]
+  end
+  LS[("localStorage<br/>key mhg.v1")]
+  subgraph BT ["Build and check time (Node.js)"]
+    direction LR
+    BD["build-data.js"]
+    VD["validate-data.js"]
+    SRC["src3d + esbuild"]
+  end
+  U --> IDX
+  IDX --> CSS
+  CSS --> FN
+  IDX --> APP
+  APP --> DAT
+  VW -. "on demand" .-> M3
+  ST <--> LS
+  BD -- generates --> DAT
+  VD -. checks .-> DAT
+  SRC -- bundles --> M3

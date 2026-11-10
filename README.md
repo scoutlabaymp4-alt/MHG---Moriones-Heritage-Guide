@@ -15,9 +15,25 @@ Student project for *Web Systems and Technologies 1*, MarSU BSI/T 3E, group **Ac
 | 4. Plan a visit: choose a day and town, save items to a personal plan, share it as a link (extension) | Implemented |
 | 5. Reviewer labels, print mode (extension) | Implemented |
 | 6. Interactive 3D Morion mask (original model, Three.js) in the Learn pages | Implemented (v7) |
+| 7. Pre-hosting audit and fixes: shuffled quiz, safer saved data, page titles and headings, slimmer header, share preview | Done (v8) |
 
 Not done yet: review of content by local cultural bearers, native-speaker review of the Filipino text, more directory entries,
-user feedback/usability testing, deployment to GitHub Pages. See `PROJECT_DOCUMENTATION.md` (Week 2 document) and `docs/TESTING.md`.
+user feedback/usability testing. See `PROJECT_DOCUMENTATION.md` (Week 2 document) and `docs/TESTING.md`.
+
+## Live site and repository
+- Live site: **(add the GitHub Pages or Vercel address here once published)**
+- Repository: **(add the GitHub address here)**
+
+### Publish on GitHub Pages
+1. Put every file of this folder in the repository so that `index.html` is at the top level (not inside another folder). Uploading a file with the same name and path replaces the old one; delete leftovers (`sw.js`, `manifest.webmanifest`, `icon-192.png`, `icon-512.png`) from older versions.
+2. Repository **Settings → Pages → Build and deployment**: Source = *Deploy from a branch*, Branch = `main`, folder = `/ (root)`, then Save.
+3. After a minute the address `https://<username>.github.io/<repository>/` is shown. All paths in the site are relative, so it works under that sub-address.
+
+### Publish on Vercel
+1. Sign in at vercel.com with GitHub, choose **Add New → Project**, import the repository.
+2. Framework Preset = *Other*; leave Build Command and Output Directory empty; Deploy. The address ends in `.vercel.app`.
+
+After publishing, add the share-preview picture line described in the comment inside `index.html` (use the real address), and put the live link in this file.
 
 ## Run locally
 **Easiest:** double-click `index.html` (Edge, Chrome or Firefox). The page falls back to `data/content.js` when the browser blocks `data/content.json` on `file://` pages. This was the cause of the "unavailable / not found" error when launching from VS Code.
@@ -40,6 +56,7 @@ On other platforms any static server works, e.g. `python3 -m http.server 8000`, 
 - **Plan a visit** (`#/plan`): pick a day and a town; the app shows what the sources report. Save items; the plan stays on the device. "Copy link" shares the day, town and saved items (the receiver chooses whether to use the shared plan). Directory filters are also shareable (`#/directory?q=pugutan&town=boac`).
 - **Reviewer labels:** every card shows "Not yet reviewed by a local reviewer" until a reviewer is recorded in `content.json` (see below). The Sources page counts reviewed items.
 - **Desktop-first (v7):** the site is designed for laptop and desktop screens (wider layout, larger type, three-column directory). Narrow screens still work but are not the focus. The earlier offline/installable-app (PWA) experiment was removed; the app now removes any old service worker and `mhg-` caches it finds.
+- **v8 changes:** quiz options are shuffled each run; damaged saved data falls back to defaults; one `<h1>` per page and a different tab title per page; the header is one slim sticky row on desktop; the home hero fits one screen at 1366x768; the 3D viewer is sized to the screen height; pages cross-fade where the browser supports it; `data/content.js` is only loaded on `file://` or if `content.json` cannot be fetched.
 - **3D Morion mask (v7):** `js/mask3d.js` (built from `src3d/`) draws an original, procedurally generated mask with helmet, horsehair crest, beard, eyelashes and optional silver Mogpog-style flowers. It loads only when needed (home page hero and Learn → Anatomy of a Morion). Drag to turn; arrow keys, + / −, R when the model is focused; buttons for pause, reset, zoom. If WebGL is unavailable the illustration is shown instead. Rebuild after editing `src3d/mask3d.js`: `cd src3d && npm install && npm run build`.
 - **Plan copy (v7):** "Copy plan as text" (works on `file://`), "Download .txt", a text box to copy by hand, and print. "Copy link" appears only when the site is served over http(s), because a link to a local file cannot be opened by other people.
 - **Print mode:** Print buttons on the plan and the etiquette checklist; the print style hides navigation and quiz.
@@ -68,6 +85,9 @@ tools/build-data.js regenerates data/content.js
 tools/validate-data.js checks content.json (run before every commit)
 js/mask3d.js        generated bundle of src3d/mask3d.js + Three.js (do not edit by hand)
 src3d/              source of the 3D mask (package.json, mask3d.js); node_modules is not needed to run the site
+docs/REQUIREMENTS.md   objectives, functional and non-functional requirements
+docs/ARCHITECTURE.md   sitemap, component diagram, user flow, interface design (diagrams in docs/diagrams/)
+docs/MANUSCRIPT_DRAFT.md   draft Introduction and Methodology (Markdown copy of the .docx)
 THIRD_PARTY.md      licences of third-party code and fonts
 assets/icons/       favicon
 docs/TESTING.md     what was tested and how

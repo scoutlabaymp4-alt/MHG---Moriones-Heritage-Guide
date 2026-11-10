@@ -6,6 +6,14 @@
   <title>Moriones Heritage Guide</title>
   <meta name="description" content="A bilingual learning and visitor companion for the Moryonan of Marinduque. Student project, MarSU.">
   <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#1b1410">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Moriones Heritage Guide">
+  <meta property="og:description" content="A bilingual (English/Filipino) learning and visitor companion for the Moryonan of Marinduque. Student project, MarSU.">
+  <meta property="og:site_name" content="MHG">
+  <meta name="twitter:card" content="summary">
+  <!-- After the site is live, add this line (use your real address) so shared links show a picture:
+       <meta property="og:image" content="https://YOUR-LIVE-ADDRESS/assets/og-card.png"> and change twitter:card to summary_large_image -->
   <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -21,20 +29,20 @@
           <span id="siteTagline" class="brand-tag"></span>
         </span>
       </a>
+      <nav aria-label="Main">
+        <ul class="nav" id="nav"></ul>
+      </nav>
       <div class="lang" role="group" aria-labelledby="langLabel">
         <span id="langLabel" class="visually-hidden">Language</span>
         <button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" class="lang-btn" data-lang="fil" aria-pressed="false">FIL</button>
       </div>
     </div>
-    <nav class="wrap" aria-label="Main">
-      <ul class="nav" id="nav"></ul>
-    </nav>
   </header>
 
-  <div class="notice" role="note">
+  <aside class="notice">
     <div class="wrap" id="notice"></div>
-  </div>
+  </aside>
 
   <main id="main" class="wrap" tabindex="-1">
     <p id="loading">Loading…</p>
@@ -45,8 +53,7 @@
     <div class="wrap" id="footer"></div>
   </footer>
 
-  <!-- content.js is a generated copy of content.json so the page also works when opened from disk (file://) -->
-  <script src="data/content.js"></script>
+  <!-- data/content.js is a generated copy of content.json, loaded by app.js only when the page is opened from disk (file://) -->
   <script src="js/app.js"></script>
 </body>
 </html>

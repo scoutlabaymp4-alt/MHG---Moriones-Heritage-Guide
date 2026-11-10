@@ -8,7 +8,21 @@
   var STORE_KEY = 'mhg.v1';
   var DATA = null;
   var state = load();
-  var quiz = { started: false, i: 0, score: 0, picked: null, done: false };
+  var quiz = newQuiz(false);
+  /* Fisher-Yates shuffle (unbiased) */
+  function shuffled(n) {
+    var a = [], i, j, x;
+    for (i = 0; i < n; i++) a.push(i);
+    for (i = n - 1; i > 0; i--) { j = Math.floor(Math.random() * (i + 1)); x = a[i]; a[i] = a[j]; a[j] = x; }
+    return a;
+  }
+  /* A new run shows each question's options in a fresh random order, so the right answer is not always "A".
+   * picked and answer stay as indexes into the ORIGINAL options array; order[] only controls what is shown where. */
+  function newQuiz(started) {
+    var q = { started: started, i: 0, score: 0, picked: null, done: false, order: [] };
+    if (started && DATA) q.order = DATA.quiz.map(function (x) { return shuffled(x.options.length); });
+    return q;
+  }
   var selectedPart = null;
   var anatomyMode = 'model';   // '3d model' first; falls back to the drawing if 3D is unavailable
   var viewers = [], viewer = null;
@@ -23,7 +37,21 @@
       var raw = window.localStorage.getItem(STORE_KEY);
       if (raw) {
         var p = JSON.parse(raw);
-        Object.keys(base).forEach(function (k) { if (p && typeof p === 'object' && k in p) base[k] = p[k]; });
+        Object.keys(base).forEach(function (k) {
+          if (!p || typeof p !== 'object' || !(k in p)) return;
+          // keep a saved value only if it has the right type; anything else falls back to the default
+          var want = base[k], got = p[k];
+          var ok = Array.isArray(want) ? Array.isArray(got)
+            : (want !== null && typeof want === 'object') ? (got !== null && typeof got === 'object' && !Array.isArray(got))
+            : typeof want === 'number' ? (typeof got === 'number' && isFinite(got))
+            : typeof want === 'string' ? typeof got === 'string'
+            : true;   // 'last' defaults to null: number or null
+          if (k === 'last') ok = got === null || (typeof got === 'number' && isFinite(got));
+          if (ok) base[k] = got;
+        });
+        ['badges', 'parts', 'plan'].forEach(function (k) {
+          base[k] = base[k].filter(function (x) { return typeof x === 'string'; });
+        });
       }
     } catch (e) { /* storage unavailable: run in memory */ }
     if (base.lang !== 'en' && base.lang !== 'fil') base.lang = 'en';
@@ -39,6 +67,7 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function has(obj, k) { return Object.prototype.hasOwnProperty.call(obj, k); }
   function t(obj) { return obj ? (obj[state.lang] || obj.en || '') : ''; }
   function ui(key) { return t(DATA.ui[key]); }  
   function $(sel, root) { return (root || document).querySelector(sel); }
@@ -83,7 +112,6 @@
 
   function renderChrome() {
     document.documentElement.lang = state.lang;
-    document.title = ui('title');
     $('#siteTitle').textContent = ui('title');
     $('#siteTagline').textContent = ui('tagline');
     $('#notice').textContent = ui('notice');
@@ -91,7 +119,9 @@
     $('#langLabel').textContent = ui('langLabel');
     $('#footer').textContent = ui('footer');
     $all('.lang-btn').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === state.lang)); });
-    var cur = parseRoute().view;
+    var rt = parseRoute(), cur = rt.view;
+    var pageName = cur === 'learn' ? t(DATA.ui.learnTabs[LEARN.indexOf(rt.sub) >= 0 ? rt.sub : 'legend']) : t(DATA.ui.nav[cur]);
+    document.title = pageName + ' \u00b7 ' + ui('title');
     $('#nav').innerHTML = ROUTES.map(function (r) {
       return '<li><a href="#/' + r + '"' + (r === cur ? ' aria-current="page"' : '') + '>' + esc(t(DATA.ui.nav[r])) + '</a></li>';
     }).join('');
@@ -121,14 +151,14 @@
           '" aria-controls="panel" data-sub="' + k + '" tabindex="' + (k === sub ? '0' : '-1') + '">' + esc(t(DATA.ui.learnTabs[k])) + '</button>';
       }).join('') + '</div>';
     var body = sub === 'legend' ? legendHTML() : sub === 'rites' ? ritesHTML() : anatomyHTML();
-    var head = sub === 'legend' ? heroHTML() : '<h2>' + esc(t(DATA.ui.nav.learn)) + '</h2>';
+    var head = sub === 'legend' ? heroHTML() : '<h1>' + esc(t(DATA.ui.nav.learn)) + '</h1>';
     return head + tabs +
       '<div id="panel" role="tabpanel" aria-labelledby="tab-' + sub + '">' + body + '</div>';
   }
 
   function heroHTML() {
     return '<section class="hero"><div><p class="eyebrow">' + esc(ui('heroKicker')) + '</p>' +
-      '<h2>Mory<em>onan</em></h2><p class="lead">' + esc(ui('heroLead')) + '</p>' +
+      '<h1>Mory<em>onan</em></h1><p class="lead">' + esc(ui('heroLead')) + '</p>' +
       '<p><a class="btn hero-cta" href="#/learn/anatomy">' + esc(ui('heroCta')) + '</a></p></div>' +
       '<div class="arch" id="heroArch" aria-hidden="true"><svg viewBox="64 -4 172 215" focusable="false">' + figureArt() + '</svg></div></section>';
   }
@@ -138,13 +168,13 @@
     var paras = L.paragraphs.map(function (p) {
       return '<div class="card"><p>' + esc(t(p.text)) + '</p>' + srcRow(p) + '</div>';
     }).join('');
-    var origin = '<div class="card origin"><h3>' + esc(ui('originNoteTitle')) + '</h3><p>' + esc(t(L.originNote)) + '</p>' + srcRow(L.originNote) + '</div>';
+    var origin = '<div class="card origin"><h3 aria-level="2">' + esc(ui('originNoteTitle')) + '</h3><p>' + esc(t(L.originNote)) + '</p>' + srcRow(L.originNote) + '</div>';
     return '<div class="legend-grid">' + paras + origin + '</div>';
   }
 
   function ritesHTML() {
     var items = DATA.rites.map(function (r) {
-      return '<li><div class="day">' + esc(t(r.day)) + '</div><h3>' + esc(t(r.title)) + '</h3><p>' + esc(t(r.text)) + '</p>' + srcRow(r, true) + '</li>';
+      return '<li><div class="day">' + esc(t(r.day)) + '</div><h3 aria-level="2">' + esc(t(r.title)) + '</h3><p>' + esc(t(r.text)) + '</p>' + srcRow(r, true) + '</li>';
     }).join('');
     return '<p class="muted">' + esc(t(DATA.meta.scheduleNote)) + '</p><ol class="timeline">' + items + '</ol>';
   }
@@ -240,7 +270,7 @@
     if (!panel) return;
     var modelled = selectedPart === 'mask' || selectedPart === 'crest';
     panel.innerHTML = g
-      ? '<h3>' + esc(t(g.name)) + '</h3><p>' + esc(t(g.text)) + '</p>' + srcRow(g, true) +
+      ? '<h3 aria-level="2">' + esc(t(g.name)) + '</h3><p>' + esc(t(g.text)) + '</p>' + srcRow(g, true) +
         (anatomyMode === 'model' && !modelled ? '<p class="small muted">' + esc(ui('m3dNotModelled')) + '</p>' : '')
       : '<p class="muted">' + esc(ui('anatomyPrompt')) + '</p>';
     if (viewer) viewer.highlight(modelled ? selectedPart : null);
@@ -284,8 +314,8 @@
         return '<option value="' + k + '">' + esc(t(F[group][k])) + '</option>';
       }).join('');
     }
-    return '<h2>' + esc(ui('dirTitle')) + '</h2><p class="muted">' + esc(ui('dirIntro')) + '</p><p class="muted small">' + esc(t(DATA.meta.scheduleNote)) + '</p>' +
-      '<form class="filters" role="search" id="dirForm" onsubmit="return false">' +
+    return '<h1>' + esc(ui('dirTitle')) + '</h1><p class="muted">' + esc(ui('dirIntro')) + '</p><p class="muted small">' + esc(t(DATA.meta.scheduleNote)) + '</p>' +
+      '<form class="filters" role="search" id="dirForm">' +
       '<div><label for="dq">' + esc(ui('search')) + '</label><input type="search" id="dq" placeholder="' + esc(ui('searchPh')) + '" autocomplete="off"></div>' +
       '<div><label for="dm">' + esc(ui('municipality')) + '</label><select id="dm">' + opts('municipality') + '</select></div>' +
       '<div><label for="dc">' + esc(ui('category')) + '</label><select id="dc">' + opts('category') + '</select></div>' +
@@ -313,7 +343,7 @@
     var rows = filterDirectory();
     $('#dcount').textContent = rows.length + ' ' + ui('results');
     $('#dresults').innerHTML = rows.length ? rows.map(function (d) {
-      return '<li><article class="card" data-cat="' + d.category + '"><h3>' + esc(t(d.name)) + '</h3>' +
+      return '<li><article class="card" data-cat="' + d.category + '"><h3 aria-level="2">' + esc(t(d.name)) + '</h3>' +
         '<div><span class="chip">' + esc(t(DATA.filters.category[d.category])) + '</span> ' + townChips(d) +
         (d.typical ? ' <span class="chip warn">' + esc(ui('verifyYearly')) + '</span>' : '') + '</div>' +
         '<dl class="meta"><div><dt>' + esc(ui('when')) + ':</dt> <dd>' + esc(t(d.when)) + '</dd></div>' +
@@ -331,11 +361,12 @@
 
   function bindDirectory(params) {
     var q = $('#dq'), m = $('#dm'), c = $('#dc');
+    $('#dirForm').addEventListener('submit', function (e) { e.preventDefault(); });
     if (params && (params.q !== undefined || params.town !== undefined || params.cat !== undefined)) {
       dirFilter = {
         q: params.q || '',
-        town: DATA.filters.municipality[params.town] ? params.town : '',
-        category: DATA.filters.category[params.cat] ? params.cat : ''
+        town: has(DATA.filters.municipality, params.town) ? params.town : '',
+        category: has(DATA.filters.category, params.cat) ? params.cat : ''
       };
     }
     q.value = dirFilter.q; m.value = dirFilter.town; c.value = dirFilter.category;
@@ -370,9 +401,9 @@
     var townOpts = '<option value="">' + esc(ui('anyTown')) + '</option>' + Object.keys(DATA.filters.municipality).filter(function (k) { return k !== 'island'; }).map(function (k) {
       return '<option value="' + k + '">' + esc(t(DATA.filters.municipality[k])) + '</option>';
     }).join('');
-    return '<h2>' + esc(ui('planTitle')) + '</h2><p class="muted">' + esc(ui('planIntro')) + '</p><p class="muted small">' + esc(t(DATA.meta.scheduleNote)) + '</p>' +
+    return '<h1>' + esc(ui('planTitle')) + '</h1><p class="muted">' + esc(ui('planIntro')) + '</p><p class="muted small">' + esc(t(DATA.meta.scheduleNote)) + '</p>' +
       '<div id="sharedBox"></div>' +
-      '<form class="filters plan-filters" id="planForm" onsubmit="return false">' +
+      '<form class="filters plan-filters" id="planForm">' +
       '<div><label for="pday">' + esc(ui('day')) + '</label><select id="pday">' + dayOpts + '</select></div>' +
       '<div><label for="ptown">' + esc(ui('town')) + '</label><select id="ptown">' + townOpts + '</select></div>' +
       '<div class="span2"></div></form>' +
@@ -398,9 +429,9 @@
     var places = DATA.directory.filter(function (d) {
       return events.indexOf(d) < 0 && (d.category === 'site' || d.days.indexOf('any') >= 0) && (!town || d.towns.indexOf(town) >= 0);
     });
-    var html = '<h3 class="sec">' + esc(ui('onDay')) + ' ' + esc(dayName(day)) + '</h3>' +
+    var html = '<h3 aria-level="2" class="sec">' + esc(ui('onDay')) + ' ' + esc(dayName(day)) + '</h3>' +
       (events.length ? events.map(planCard).join('') : '<div class="card"><p>' + esc(ui('nothingDay')) + '</p></div>');
-    if (places.length) html += '<h3 class="sec">' + esc(ui('inTown')) + '</h3>' + places.map(planCard).join('');
+    if (places.length) html += '<h3 aria-level="2" class="sec">' + esc(ui('inTown')) + '</h3>' + places.map(planCard).join('');
     $('#presults').innerHTML = html;
     setHash('plan', { day: day, town: town, ids: state.plan.join(',') });
   }
@@ -462,7 +493,7 @@
         '<button type="button" class="btn secondary small-btn" data-remove="' + d.id + '" aria-label="' + esc(ui('removeFromPlan') + ': ' + t(d.name)) + '">' + esc(ui('removeFromPlan')) + '</button></li>';
     }).join('') + '</ol>' : '<p class="muted">' + esc(ui('emptyPlan')) + '</p>';
     var web = /^https?:$/.test(location.protocol), dis = items.length ? '' : ' disabled';
-    box.innerHTML = '<h3 id="myplanH">' + esc(ui('myPlan')) + '</h3>' + list +
+    box.innerHTML = '<h3 aria-level="2" id="myplanH">' + esc(ui('myPlan')) + '</h3>' + list +
       '<p class="muted small">' + esc(t(DATA.meta.scheduleNote)) + '</p>' +
       '<div class="actions"><button type="button" class="btn" id="copyPlan"' + dis + '>' + esc(ui('copyText')) + '</button> ' +
       '<button type="button" class="btn secondary" id="dlPlan"' + dis + '>' + esc(ui('downloadTxt')) + '</button> ' +
@@ -505,8 +536,9 @@
 
   function bindPlan(params) {
     var day = $('#pday'), town = $('#ptown');
+    $('#planForm').addEventListener('submit', function (e) { e.preventDefault(); });
     if (params && params.day && DATA.days.some(function (d) { return d.id === params.day; })) planFilter.day = params.day;
-    if (params && params.town !== undefined) planFilter.town = (DATA.filters.municipality[params.town] && params.town !== 'island') ? params.town : '';
+    if (params && params.town !== undefined) planFilter.town = (has(DATA.filters.municipality, params.town) && params.town !== 'island') ? params.town : '';
     if (params && params.ids) {
       var ids = params.ids.split(',').filter(function (id) { return dirById(id); });
       if (ids.length && ids.join(',') !== state.plan.join(',')) {
@@ -532,7 +564,7 @@
 
   /* ---------- Quiz + etiquette ---------- */
   function quizView() {
-    return '<h2>' + esc(ui('quizTitle')) + '</h2>' +
+    return '<h1>' + esc(ui('quizTitle')) + '</h1>' +
       '<div class="two-col"><div>' + '<div class="card" id="quizBox"></div>' + '</div>' +
       '<div><div class="card" id="statsBox"></div><div class="card" id="badgeBox"></div></div></div>' +
       '<h2>' + esc(ui('etiquetteTitle')) + '</h2><p class="muted">' + esc(ui('etiquetteIntro')) + '</p>' +
@@ -546,19 +578,20 @@
     var Q = DATA.quiz;
     if (!quiz.started) {
       box.innerHTML = '<p>' + esc(ui('quizIntro')) + '</p><button type="button" class="btn" id="qstart">' + esc(ui('start')) + '</button>';
-      $('#qstart').addEventListener('click', function () { quiz = { started: true, i: 0, score: 0, picked: null, done: false }; drawQuiz(); focusQuiz(); });
+      $('#qstart').addEventListener('click', function () { quiz = newQuiz(true); drawQuiz(); focusQuiz(); });
     } else if (quiz.done) {
-      box.innerHTML = '<h3 tabindex="-1" id="qresult">' + esc(ui('score')) + ': ' + quiz.score + ' / ' + Q.length + '</h3>' +
+      box.innerHTML = '<h3 aria-level="2" tabindex="-1" id="qresult">' + esc(ui('score')) + ': ' + quiz.score + ' / ' + Q.length + '</h3>' +
         segBar(quiz.score, Q.length) +
         '<button type="button" class="btn" id="qretry">' + esc(ui('retry')) + '</button>';
-      $('#qretry').addEventListener('click', function () { quiz = { started: true, i: 0, score: 0, picked: null, done: false }; drawQuiz(); focusQuiz(); });
+      $('#qretry').addEventListener('click', function () { quiz = newQuiz(true); drawQuiz(); focusQuiz(); });
       var r = $('#qresult'); if (r) r.focus();
     } else {
       var q = Q[quiz.i], answered = quiz.picked !== null;
-      var optsHTML = q.options.map(function (o, idx) {
-        var cls = '';
+      var ord = quiz.order[quiz.i] || q.options.map(function (o, n) { return n; });
+      var optsHTML = ord.map(function (idx, pos) {
+        var o = q.options[idx], cls = '';
         if (answered) cls = idx === q.answer ? ' right' : (idx === quiz.picked ? ' wrong' : '');
-        return '<li><button type="button" class="opt' + cls + '" data-idx="' + idx + '"' + (answered ? ' disabled' : '') + '><span class="k" aria-hidden="true">' + 'ABCD'.charAt(idx) + '</span><span>' + esc(t(o)) + '</span></button></li>';
+        return '<li><button type="button" class="opt' + cls + '" data-idx="' + idx + '"' + (answered ? ' disabled' : '') + '><span class="k" aria-hidden="true">' + 'ABCD'.charAt(pos) + '</span><span>' + esc(t(o)) + '</span></button></li>';
       }).join('');
       var fb = '';
       if (answered) {
@@ -568,7 +601,7 @@
       }
       box.innerHTML = segBar(quiz.i + (answered ? 1 : 0), Q.length) +
         '<p class="muted" id="qnum">' + esc(ui('question')) + ' ' + (quiz.i + 1) + ' ' + esc(ui('of')) + ' ' + Q.length + '</p>' +
-        '<h3 id="qtext" tabindex="-1">' + esc(t(q.q)) + '</h3><ul class="quiz-options">' + optsHTML + '</ul>' + fb;
+        '<h3 aria-level="2" id="qtext" tabindex="-1">' + esc(t(q.q)) + '</h3><ul class="quiz-options">' + optsHTML + '</ul>' + fb;
       $all('.opt', box).forEach(function (b) {
         b.addEventListener('click', function () { answer(parseInt(b.dataset.idx, 10)); });
       });
@@ -615,7 +648,7 @@
     s.innerHTML = '<p><strong>' + esc(ui('best')) + ':</strong> ' + (state.attempts ? state.best + ' / ' + total : '–') +
       '<br><strong>' + esc(ui('attempts')) + ':</strong> ' + state.attempts + '</p>';
     var names = DATA.ui.badgeNames, hints = DATA.ui.badgeHints;
-    b.innerHTML = '<h3>' + esc(ui('badges')) + '</h3><ul class="badges">' + Object.keys(names).map(function (k) {
+    b.innerHTML = '<h3 aria-level="2">' + esc(ui('badges')) + '</h3><ul class="badges">' + Object.keys(names).map(function (k) {
       var on = state.badges.indexOf(k) >= 0;
       return '<li class="badge' + (on ? ' earned' : '') + '"><div class="n">' + (on ? '★ ' : '☆ ') + esc(t(names[k])) + '</div><div class="h">' + esc(t(hints[k])) + '</div></li>';
     }).join('') + '</ul>';
@@ -649,7 +682,7 @@
     $('#resetAll').addEventListener('click', function () {
       if (!window.confirm(ui('resetConfirm'))) return;
       var lang = state.lang; state = defaults(); state.lang = lang; save();
-      quiz = { started: false, i: 0, score: 0, picked: null, done: false };
+      quiz = newQuiz(false);
       selectedPart = null;
       drawQuiz(); drawChecklist();
     });
@@ -664,19 +697,25 @@
     var groups = [DATA.legend.paragraphs, DATA.rites, DATA.glossary, DATA.directory, DATA.quiz, DATA.etiquette];
     var total = 0, done = 0;
     groups.forEach(function (g) { g.forEach(function (it) { total++; if (it.review && it.review.status === 'reviewed') done++; }); });
-    return '<h2>' + esc(ui('sourcesTitle')) + '</h2><p class="muted">' + esc(ui('sourcesIntro')) + '</p>' +
+    return '<h1>' + esc(ui('sourcesTitle')) + '</h1><p class="muted">' + esc(ui('sourcesIntro')) + '</p>' +
       '<ul class="sources-list">' + items + '</ul>' +
-      '<div class="card origin"><h3>' + esc(ui('reviewTitle')) + '</h3><p>' + esc(ui('reviewText')) + '</p>' +
+      '<div class="card origin"><h3 aria-level="2">' + esc(ui('reviewTitle')) + '</h3><p>' + esc(ui('reviewText')) + '</p>' +
       '<p><strong>' + done + ' / ' + total + '</strong> ' + esc(state.lang === 'fil' ? 'bagay ang nasuri ng lokal na tagasuri.' : 'items have been reviewed by a local reviewer.') + '</p></div>';
   }
 
   /* ---------- router ---------- */
   function render(opts) {
-    var r = parseRoute(), main = $('#main');
-    destroyViewers();
+    var r = parseRoute(), main = $('#main'), keep = null;
+    // a language switch on the hero page keeps the running 3D viewer instead of rebuilding its WebGL context
+    if (opts && opts.keepHero && r.view === 'learn' && LEARN.indexOf(r.sub) <= 0) {
+      var old = $('#heroArch');
+      if (old && old.classList.contains('is-3d')) keep = { el: old, viewers: viewers.slice() };
+    }
+    if (keep) { viewers = []; viewer = null; } else destroyViewers();
     renderChrome();
     if (r.view === 'learn') {
       main.innerHTML = renderLearn(r.sub);
+      if (keep) { var fresh = $('#heroArch'); if (fresh) { fresh.parentNode.replaceChild(keep.el, fresh); viewers = keep.viewers; } else keep.viewers.forEach(function (v) { try { v.destroy(); } catch (e) { /* ignore */ } }); }
       bindLearn(LEARN.indexOf(r.sub) < 0 ? 'legend' : r.sub);
     } else if (r.view === 'directory') {
       main.innerHTML = directoryHTML(); bindDirectory(r.params);
@@ -740,8 +779,8 @@
     }
     var sc = document.createElement('script');
     sc.src = 'js/mask3d.js';
-    sc.onload = function () { done(!!(window.MHGMask && window.MHGMask.supported())); };
-    sc.onerror = function () { done(false); };
+    sc.onload = function () { done(!!(window.MHGMask && window.MHGMask.supported())); };  // no WebGL: stays 'failed'
+    sc.onerror = function () { if (sc.parentNode) sc.parentNode.removeChild(sc); done(false); maskState = 'idle'; };  // network error: allow a retry later
     document.head.appendChild(sc);
   }
   function destroyViewers() {
@@ -749,7 +788,7 @@
     viewers = []; viewer = null;
   }
   function mountHero() {
-    var arch = $('#heroArch'); if (!arch) return;
+    var arch = $('#heroArch'); if (!arch || arch.classList.contains('is-3d')) return;
     loadMask(function (ok) {
       var again = $('#heroArch');
       if (!ok || again !== arch || !document.body.contains(arch)) return;
@@ -837,25 +876,34 @@
     $all('.lang-btn').forEach(function (b) {
       b.addEventListener('click', function () {
         state.lang = b.dataset.lang; save();
-        render();
+        render({ keepHero: true });
       });
     });
     window.addEventListener('hashchange', function () {
-      quiz = quiz.done ? { started: false, i: 0, score: 0, picked: null, done: false } : quiz;
+      quiz = quiz.done ? newQuiz(false) : quiz;
       var focusTab = pendingLearnTabFocus;
       pendingLearnTabFocus = false;
-      render({ focus: !focusTab, focusTab: focusTab });
+      var go = function () { render({ focus: !focusTab, focusTab: focusTab }); };
+      // soft cross-fade between pages where the browser supports it (skipped for reduced motion)
+      if (document.startViewTransition && !reducedMotion()) { try { document.startViewTransition(go); } catch (e) { go(); } } else go();
     });
     // Prefer the JSON file (always current over http). When the page is opened straight from disk
     // (file://) the browser blocks fetch(), so fall back to the generated copy in data/content.js.
     cleanupOldOffline();
-    var fromDisk = location.protocol === 'file:' && window.MHG_DATA;
-    (fromDisk ? Promise.resolve(window.MHG_DATA) : fetch('data/content.json')
-      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }))
-      .catch(function () {
-        if (window.MHG_DATA) return window.MHG_DATA;
-        throw new Error('no data');
-      })
+    function loadScriptData() {
+      return new Promise(function (resolve, reject) {
+        if (window.MHG_DATA) return resolve(window.MHG_DATA);
+        var sc = document.createElement('script');
+        sc.src = 'data/content.js';
+        sc.onload = function () { window.MHG_DATA ? resolve(window.MHG_DATA) : reject(new Error('no data')); };
+        sc.onerror = function () { reject(new Error('no data')); };
+        document.head.appendChild(sc);
+      });
+    }
+    // online: only content.json is downloaded; content.js is loaded only from disk (file://) or if the fetch fails
+    (location.protocol === 'file:' ? loadScriptData() : fetch('data/content.json')
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .catch(loadScriptData))
       .then(function (json) { DATA = json; render(); })
       .catch(function () {
         $('#main').innerHTML = '<div class="error" role="alert">' + esc('The content could not be loaded. Make sure data/content.js and data/content.json are next to index.html, then reload. / Hindi ma-load ang nilalaman. Tiyaking nasa tabi ng index.html ang data/content.js at data/content.json, pagkatapos ay i-reload.') + '</div>';

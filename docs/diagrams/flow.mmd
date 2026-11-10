@@ -1,0 +1,13 @@
+flowchart LR
+  A(["Open index.html"]) --> B["Choose<br/>EN / FIL"] --> C{"Goal?"}
+  C -- Learn --> D["Read legend,<br/>timeline, anatomy"] --> E{"WebGL?"}
+  E -- Yes --> F["Turn 3D mask"] --> H["Read part text<br/>+ sources"]
+  E -- No --> G["SVG illustration<br/>6 hotspots"] --> H
+  C -- "Find a rite or site" --> I["Search / filter<br/>directory"]
+  C -- "Prepare a visit" --> J["Pick day + town"] --> K["Save to<br/>My plan"] --> L["Copy text /<br/>.txt / print"]
+  C -- "Test myself" --> M["Quiz + badges"] --> N["Etiquette<br/>checklist"]
+  H --> O(["Progress saved in this browser only"])
+  K --> O
+  N --> O
+  classDef r fill:#a82219,stroke:#1b1410,color:#fff8ee;
+  class A,O r
