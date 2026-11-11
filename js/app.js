@@ -25,7 +25,7 @@
   }
   var selectedPart = null;
   var anatomyMode = 'model';   // '3d model' first; falls back to the drawing if 3D is unavailable
-  var viewers = [], viewer = null;
+  var viewers = [], viewer = null, m3dStyle = 'red';
 
   /* ---------- storage (every access guarded) ---------- */
   function defaults() {
@@ -259,6 +259,8 @@
       '<button type="button" class="btn secondary sm" id="m3dReset">' + esc(ui('m3dReset')) + '</button>' +
       '<button type="button" class="btn secondary sm sq" id="m3dZin" aria-label="' + esc(ui('m3dZoomIn')) + '">+</button>' +
       '<button type="button" class="btn secondary sm sq" id="m3dZout" aria-label="' + esc(ui('m3dZoomOut')) + '">\u2212</button></div>' +
+      '<fieldset class="mask3d-styles"><legend>' + esc(ui('m3dStyleLegend')) + '</legend>' +
+      ['red', 'black', 'woven'].map(function (k) { return '<label class="check"><input type="radio" name="m3dStyle" value="' + k + '"' + (m3dStyle === k ? ' checked' : '') + '><span>' + esc(ui('m3dStyle' + k.charAt(0).toUpperCase() + k.slice(1))) + '</span></label>'; }).join('') + '</fieldset>' +
       '<div class="mask3d-opts"><label class="check"><input type="checkbox" id="m3dHelmet" checked><span>' + esc(ui('m3dHelmet')) + '</span></label>' +
       '<label class="check"><input type="checkbox" id="m3dFlowers"><span>' + esc(ui('m3dFlowers')) + '</span></label></div>' +
       '<p class="small muted">' + esc(ui('m3dHint')) + '</p><p class="small muted m3d-credit">' + esc(ui('m3dCredit')) + '</p></div>';
@@ -829,7 +831,7 @@
         if (!ok) { fallbackToDrawing(); return; }
         try {
           viewer = window.MHGMask.create(stage, {
-            label: ui('m3dLabel'), auto: !reducedMotion(),
+            label: ui('m3dLabel'), auto: !reducedMotion(), style: m3dStyle,
             onAutoChange: function (on) { var b = $('#m3dAuto'); if (b) { b.setAttribute('aria-pressed', String(on)); b.textContent = ui(on ? 'm3dPause' : 'm3dPlay'); } },
             onContextLost: function () { if (anatomyMode === 'model') fallbackToDrawing(); }
           });
@@ -844,6 +846,16 @@
             viewer.setHelmet(e.target.checked); $('#m3dFlowers').disabled = !e.target.checked;
           });
           $('#m3dFlowers').addEventListener('change', function (e) { viewer.setFlowers(e.target.checked); });
+          $('#m3dFlowers').disabled = !viewer.flowersAvailable();
+          $all('input[name="m3dStyle"]').forEach(function (r) {
+            r.addEventListener('change', function (e) {
+              if (!e.target.checked) return;
+              m3dStyle = e.target.value; var res = viewer.setStyle(m3dStyle);
+              var fl = $('#m3dFlowers'); fl.disabled = !res.flowers || !$('#m3dHelmet').checked;
+              if (!res.flowers) fl.checked = false; else viewer.setFlowers(fl.checked);
+              if (selectedPart === 'mask' || selectedPart === 'crest') viewer.highlight(selectedPart);
+            });
+          });
           if (selectedPart === 'mask' || selectedPart === 'crest') viewer.highlight(selectedPart);
         } catch (e) { fallbackToDrawing(); }
       });

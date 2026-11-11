@@ -487,16 +487,16 @@ window.MHG_DATA = {
       "fil": "I-drag ang maskara para paikutin. I-click ang model, pagkatapos gamitin ang arrow keys para umikot, + at − para mag-zoom, R para mag-reset. Piliin ang \"Helmet at tuktok\" o \"Maskara\" sa ibaba para i-highlight ito."
     },
     "m3dCredit": {
-      "en": "Original 3D model made for this project in code (Three.js, MIT licence). A generic traditional-style mask, not a copy of any museum object or of a particular maker's work. Not yet reviewed by a mask carver.",
-      "fil": "Orihinal na 3D model na ginawa sa code para sa proyektong ito (Three.js, lisensyang MIT). Pangkalahatang tradisyunal na istilo ng maskara, hindi kopya ng anumang bagay sa museo o ng gawa ng partikular na manlililok. Hindi pa nasusuri ng manlililok ng maskara."
+      "en": "Original 3D model made for this project in code (Three.js, MIT licence). The three helmet styles are simplified interpretations drawn from what photographs of three Moriones masks on the Mask Museum website show in common. Nothing is copied or traced, and no museum image is used in the app. Not a replica of any one mask, and not yet reviewed by a mask carver.",
+      "fil": "Orihinal na 3D model na ginawa sa code para sa proyektong ito (Three.js, lisensyang MIT). Ang tatlong istilo ng helmet ay pinasimpleng interpretasyon mula sa karaniwang makikita sa mga larawan ng tatlong maskarang Moriones sa website ng Mask Museum. Walang kinopya o sinundan, at walang larawan ng museo sa app. Hindi ito replika ng alinmang maskara at hindi pa nasusuri ng manlililok ng maskara."
     },
     "m3dNotModelled": {
       "en": "This part is shown in the illustration only. The 3D model covers the mask, helmet and crest.",
       "fil": "Sa guhit lamang ipinapakita ang bahaging ito. Sakop ng 3D model ang maskara, helmet at tuktok."
     },
     "m3dLabel": {
-      "en": "3D model of a Morion mask: a carved wooden scowling face with beard, a helmet with a horsehair crest. Drag to turn it.",
-      "fil": "3D model ng maskarang Morion: inukit na kahoy na mukhang galit na may balbas, helmet na may tuktok na buhok ng kabayo. I-drag para paikutin."
+      "en": "3D model of a Moriones mask: a painted wooden scowling face with wide eyes, beard and ears, and a helmet. Three helmet styles can be chosen. Drag to turn it.",
+      "fil": "3D model ng maskarang Moriones: pininturahang kahoy na mukhang galit na may malalaking mata, balbas at tainga, at helmet. May tatlong istilo ng helmet na mapipili. I-drag para paikutin."
     },
     "copyText": {
       "en": "Copy plan as text",
@@ -525,6 +525,22 @@ window.MHG_DATA = {
     "linkNote": {
       "en": "Links to a local copy of this page cannot be opened by other people. Share the plan as text, or put the site online first (for example GitHub Pages) to share a link.",
       "fil": "Hindi mabubuksan ng ibang tao ang link sa lokal na kopya ng pahinang ito. Ibahagi ang plano bilang teksto, o i-publish muna ang site (hal. GitHub Pages) para makapagbahagi ng link."
+    },
+    "m3dStyleLegend": {
+      "en": "Helmet style",
+      "fil": "Istilo ng helmet"
+    },
+    "m3dStyleRed": {
+      "en": "Red & gold",
+      "fil": "Pula at ginto"
+    },
+    "m3dStyleBlack": {
+      "en": "Black & gold",
+      "fil": "Itim at ginto"
+    },
+    "m3dStyleWoven": {
+      "en": "Woven",
+      "fil": "Hinabi"
     }
   },
   "legend": {

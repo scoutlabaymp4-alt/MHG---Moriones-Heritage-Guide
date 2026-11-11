@@ -77,6 +77,9 @@ Checks run in headless Chromium (Playwright) on 10 November 2026 before publishi
 | 42 | Layout at 1280x720, 1366x768, 1920x1080, 1024x768, 820x1180, 390x844: no horizontal scroll; header is one 76 px row at 1366 wide (was 161 px) and sticky above 1100 px; hero fits one screen at 1366x768; Anatomy 3D viewer ends at about y=826 (the old figure box ended at y=1307) | Pass (screenshots viewed) |
 | 43 | axe-core WCAG 2.x A/AA plus best-practice rules, 7 views x light/dark, 3D blocked | 0 violations (the first run found 2 best-practice issues: heading order and a notice outside any landmark; fixed) |
 
+| 44 | Logo (background-removed photo) in the header, favicon and share image: loads (naturalWidth > 0), header 83 px tall at 1366 wide, 128 px (two rows) at 1100; no horizontal scroll at 6 screen sizes; axe-core 0 violations | Pass |
+| 45 | 3D mask v8.2: all three helmet styles (red, black, woven) render from front, side and back with no console errors; style picker switches style, disables the silver-flower option on the woven style, keeps helmet on/off working; EN/FIL labels. Software renderer only. | Pass (screenshots checked by eye) |
+
 Not tested: Firefox and Safari, a real phone, print output after the header change, 3D speed on a real graphics card.
 
 Manual checks still needed on the group's own computers (Windows, Edge/Chrome, real GPU): speed of the 3D view, that the mask looks right, that copy-to-clipboard works.
